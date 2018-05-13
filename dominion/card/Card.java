@@ -78,6 +78,30 @@ public abstract class Card {
 	 * non nulle).
 	 */
 	public int victoryValue(Player p) {
-		return 0;
+		int nbVictory = 0;
+		
+		CardList totalCardPlayer = new CardList();
+		List<CardType> type;
+		
+		totalCardPlayer = p.totalCards();
+		
+		for(int i = 0;i<totalCardPlayer.size();i++) {
+			type = totalCardPlayer.get(i).getTypes();
+			if(type.get(i) == CardType.Victory)
+				nbVictory = nbVictory + totalCardPlayer.get(i).victoryValue(p);
+		}
+		return nbVictory;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

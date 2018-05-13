@@ -23,7 +23,8 @@ public class Moat extends ReactionCard {
 
 	
 	public void play(Player p) {
-		
+		p.drawCard();
+		p.drawCard();
 		
 	}
 	

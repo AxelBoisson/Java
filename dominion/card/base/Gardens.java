@@ -9,4 +9,22 @@ import dominion.card.*;
  * Vaut 1VP pour chaque 10 cartes dans votre deck (arrondi à l'unité inférieure).
  */
 public class Gardens extends VictoryCard {
+	
+	private String description;
+	private int nbVictory;
+	
+	public Gardens() { 
+		super("Jardins", 2);	
+		this.description = "Vaut 1VP pour chaque 10 cartes dans votre deck (arrondi à l'unité inférieure).";
+	}
+	
+	public int victoryValue(Player p) {
+		return this.nbVictory;
+	}
+	
+	public void play(Player p) {
+		CardList totalCardPlayer = new CardList();
+		totalCardPlayer = p.totalCards();
+		this.nbVictory = totalCardPlayer.size() / 10;
+	}
 }

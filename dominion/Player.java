@@ -113,6 +113,13 @@ public class Player {
 		return this.game;
 	}
 	
+	public void setHand(Card c) {
+		this.hand.add(c);
+	}
+	
+	public void setDiscard(Card c) {
+		this.discard.add(c);
+	}
 	/**
 	 * IncrÃ©mente le nombre d'actions du joueur
 	 * 
@@ -390,33 +397,33 @@ public class Player {
 	}
 	
 	/**
-	 * Attend une entrée de la part du joueur (au clavier) et renvoie le choix
+	 * Attend une entrï¿½e de la part du joueur (au clavier) et renvoie le choix
 	 *  du joueur.
 	 * 
-	 * @param instruction message à afficher à l'écran pour indiquer au joueur
+	 * @param instruction message ï¿½ afficher ï¿½ l'ï¿½cran pour indiquer au joueur
 	 * la nature du choix qui est attendu
-	 * @param choices une liste de chaînes de caractères correspondant aux
+	 * @param choices une liste de chaï¿½nes de caractï¿½res correspondant aux
 	 * choix valides attendus du joueur (la liste sera convertie en ensemble 
-	 * par la fonction pour éliminer les doublons, ce qui permet de compter 
+	 * par la fonction pour ï¿½liminer les doublons, ce qui permet de compter 
 	 * correctement le nombre d'options disponibles)
-	 * @param canPass booléen indiquant si le joueur a le droit de passer sans
-	 * faire de choix. S'il est autorisé à passer, c'est la chaîne de
-	 * caractères vide ("") qui signifie qu'il désire passer.
+	 * @param canPass boolï¿½en indiquant si le joueur a le droit de passer sans
+	 * faire de choix. S'il est autorisï¿½ ï¿½ passer, c'est la chaï¿½ne de
+	 * caractï¿½res vide ("") qui signifie qu'il dï¿½sire passer.
 	 * 
-	 * @return la méthode lit l'entrée clavier jusqu'à ce qu'un choix valide
-	 * soit entré par l'utilisateur (un élément de {@code choices} ou
-	 * éventuellement la chaîne vide si l'utilisateur est autorisé à passer).
-	 * Lorsqu'un choix valide est obtenu, il est renvoyé.
+	 * @return la mï¿½thode lit l'entrï¿½e clavier jusqu'ï¿½ ce qu'un choix valide
+	 * soit entrï¿½ par l'utilisateur (un ï¿½lï¿½ment de {@code choices} ou
+	 * ï¿½ventuellement la chaï¿½ne vide si l'utilisateur est autorisï¿½ ï¿½ passer).
+	 * Lorsqu'un choix valide est obtenu, il est renvoyï¿½.
 	 * 
-	 * Si l'ensemble {@code choices} ne comporte qu'un seul élément et que
+	 * Si l'ensemble {@code choices} ne comporte qu'un seul ï¿½lï¿½ment et que
 	 * {@code canPass} est faux, l'unique choix valide est automatiquement
-	 * renvoyé sans lire l'entrée de l'utilisateur.
+	 * renvoyï¿½ sans lire l'entrï¿½e de l'utilisateur.
 	 * 
-	 * Si l'ensemble des choix est vide, la chaîne vide ("") est 
-	 * automatiquement renvoyée par la méthode (indépendamment de la valeur de 
+	 * Si l'ensemble des choix est vide, la chaï¿½ne vide ("") est 
+	 * automatiquement renvoyï¿½e par la mï¿½thode (indï¿½pendamment de la valeur de 
 	 * {@code canPass}).
 	 * 
-	 * Exemple d'utilisation pour demander à un joueur de répondre à une 
+	 * Exemple d'utilisation pour demander ï¿½ un joueur de rï¿½pondre ï¿½ une 
 	 * question :
 	 * <pre>
 	 * {@code
@@ -426,7 +433,7 @@ public class Player {
 	 * </pre>
 	 */
 	public String choose(String instruction, List<String> choices, boolean canPass) {
-		// La liste de choix est convertie en ensemble pour éviter les doublons
+		// La liste de choix est convertie en ensemble pour ï¿½viter les doublons
 		Set<String> choiceSet = new HashSet<String>();
 		for (String c: choices) {
 			choiceSet.add(c);
@@ -435,26 +442,26 @@ public class Player {
 			// Aucun choix disponible
 			return "";
 		} else if (choiceSet.size() == 1 && !canPass) {
-			// Un seul choix possible (renvoyer cet unique élément)
+			// Un seul choix possible (renvoyer cet unique ï¿½lï¿½ment)
 			return choiceSet.iterator().next();
 		} else {
 			String input;
-			// Lit l'entrée de l'utilisateur jusqu'à obtenir un choix valide
+			// Lit l'entrï¿½e de l'utilisateur jusqu'ï¿½ obtenir un choix valide
 			while (true) {
 				System.out.print("\n\n");
-				// affiche l'état du jeu
+				// affiche l'ï¿½tat du jeu
 				System.out.print(this.game);
 				System.out.print("\n");
-				// affiche l'état du joueur
+				// affiche l'ï¿½tat du joueur
 				System.out.print(this);
 				System.out.print("\n");
 				// affiche l'instruction
 				System.out.println(">>> " + instruction);
 				System.out.print("> ");
-				// lit l'entrée de l'utilisateur au clavier
+				// lit l'entrï¿½e de l'utilisateur au clavier
 				input = this.game.readLine();
 				if (choiceSet.contains(input) || (canPass && input.equals(""))){
-					// si une réponse valide est obtenue, elle est renvoyée
+					// si une rï¿½ponse valide est obtenue, elle est renvoyï¿½e
 					return input;
 				}
 			}
@@ -586,7 +593,7 @@ public class Player {
 		
 		decision = "noChoice";
 		while(this.buys >= 1 && decision != "") {
-			decision = chooseCard("Choisissez la carte dans la réserve que vous souhaitez acheter", this.game.availableSupplyCards(),true);
+			decision = chooseCard("Choisissez la carte dans la rï¿½serve que vous souhaitez acheter", this.game.availableSupplyCards(),true);
 			if(decision != "") {
 				buyCard(decision);
 				incrementBuys(-1);	

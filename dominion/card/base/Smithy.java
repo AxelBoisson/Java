@@ -9,4 +9,14 @@ import dominion.card.*;
  * +3 Cartes.
  */
 public class Smithy extends ActionCard {
+	
+	public Smithy() {
+		super("Forgeron",2);
+	}
+	
+	public void play(Player p) {
+		for(int i = 0; i<3;i++)
+			p.drawCard();
+	}
+	
 }
