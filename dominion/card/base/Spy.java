@@ -13,8 +13,13 @@ import dominion.card.*;
 public class Spy extends AttackCard {
 	
 	public Spy() {
-		super("Espion",2);
-		
+		super("Espion",4);
+	}
+	
+	public String toString() {
+		return super.toString() + "+1 Carte.\n" + 
+				" * +1 Action.\n" + 
+				" * Tous les joueurs (vous aussi) dévoilent la première carte de leur deck. Vous décidez ensuite si chaque carte dévoilée est défaussée ou replacée sur son deck.";
 	}
 	
 	public void play(Player p) {

@@ -12,11 +12,13 @@ import dominion.card.*;
  */
 public class Woodcutter extends ActionCard {
 	
-	private String description;
+	public Woodcutter() {
+		super("Bucheron", 3);
+	}
 	
-	public Woodcutter(String name, int cost) {
-		super(name, cost);
-		this.description = "+1 Achat, +2 Pièces";
+	public String toString() {
+		return super.toString() + " +1 Achat.\n" + 
+				" * +2 Pièces.";
 	}
 	
 	public void play(Player p) {

@@ -12,7 +12,12 @@ import dominion.card.*;
 public class Witch extends AttackCard {
 	
 	public Witch() {
-		super("Sorcière",2);
+		super("Sorcière", 5);
+	}
+	
+	public String toString() {
+		return super.toString() + "+2 Cartes.\n" + 
+				" * Tous vos adversaires recoivent une carte Curse.";
 	}
 	
 	public void play(Player p) {

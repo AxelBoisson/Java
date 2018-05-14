@@ -11,14 +11,13 @@ import dominion.card.*;
  */
 public class ThroneRoom extends ActionCard {
 	
-	private String description;
+	public ThroneRoom() {	
+		super("Salle du trône",4);
+	}
 	
-	public ThroneRoom() {
-		
-		super("Salle du trône",2);
-		this.description = "Choisissez 1 carte Action de votre main.\n" + 
-				" Jouez-la deux fois.";
-		
+	public String toString() {
+		return super.toString() + "Choisissez 1 carte Action de votre main.\n" + 
+				" * Jouez-la deux fois.";
 	}
 	
 	public void play(Player p) {

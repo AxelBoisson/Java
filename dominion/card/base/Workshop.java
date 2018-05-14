@@ -11,7 +11,11 @@ import dominion.card.*;
 public class Workshop extends ActionCard {
 	
 	public Workshop() {
-		super("Atelier",2);
+		super("Atelier",3);
+	}
+	
+	public String toString() {
+		return super.toString() + "Recevez une carte coûtant jusqu'à 4 Pièces.";
 	}
 	
 	public void play(Player p) {
@@ -26,7 +30,6 @@ public class Workshop extends ActionCard {
 			}
 		}
 		
-		System.out.println("Voici les cartes disponibles");
 		for(int i = 0; i<cardAvailable.size();i++) {
 			System.out.println(cardAvailable.get(i).getName());
 		}

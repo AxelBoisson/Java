@@ -11,9 +11,13 @@ import dominion.card.*;
  */
 public class Village extends ActionCard {
 
-	public Village(String name, int cost) {
-		super(name, cost);
-		
+	public Village() {
+		super("Village", 3);
+	}
+	
+	public String toString() {
+		return super.toString() + " +1 Carte.\n" + 
+				" * +2 Actions.";
 	}
 	
 	public void play(Player p) {

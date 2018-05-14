@@ -11,7 +11,11 @@ import dominion.card.*;
 public class Smithy extends ActionCard {
 	
 	public Smithy() {
-		super("Forgeron",2);
+		super("Forgeron",4);
+	}
+	
+	public String toString() {
+		return super.toString() + "+3 Cartes.";
 	}
 	
 	public void play(Player p) {

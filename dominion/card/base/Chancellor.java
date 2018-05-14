@@ -11,12 +11,13 @@ import dominion.card.*;
  */
 public class Chancellor extends ActionCard {
 	
-private String description;
-	
 	public Chancellor() { 
-		super("Chancellier", 2);	
-		this.description = "+2 Pièces.\n" + 
-				" Vous pouvez immédiatement défausser votre deck.";
+		super("Chancellier", 3);	
+	}
+	
+	public String toString() {
+		return super.toString() + "+2 Pièces.\n" + 
+				" * Vous pouvez immédiatement défausser votre deck.";
 	}
 	
 	public void play(Player p) {

@@ -12,13 +12,15 @@ import dominion.card.*;
  */
 public class CouncilRoom extends ActionCard {
 	
-	private String description;
 	
 	public CouncilRoom() { 
-		super("Chambre du conseil", 2);	
-		this.description = "+4 Cartes.\n" + 
-				" +1 Achat.\n" + 
-				" Tous vos adversaires piochent 1 carte.";
+		super("Chambre du conseil", 2);		
+	}
+	
+	public String toString() {
+		return super.toString() + "+4 Cartes.\n" + 
+				" * +1 Achat.\n" + 
+				" * Tous vos adversaires piochent 1 carte.";
 	}
 	
 	public void play(Player p) {

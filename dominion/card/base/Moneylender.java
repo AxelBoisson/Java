@@ -13,8 +13,12 @@ public class Moneylender extends ActionCard {
 	
 	
 	public Moneylender() {
-		super("Prêteur sur gages",2);
-		
+		super("Prêteur sur gages",4);
+	}
+	
+	public String toString() {
+		return super.toString() + " Écartez une carte Cuivre de votre main.\n" + 
+				" * Dans ce cas, +3 Pièces.";
 	}
 	
 	public void play(Player p) {

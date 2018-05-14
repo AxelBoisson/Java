@@ -10,15 +10,18 @@ import dominion.card.*;
  */
 public class Adventurer extends ActionCard {
 	
-private String description;
+
 	
 	public Adventurer() { 
 		super("Aventurier", 6);	
-		this.description = "Dévoilez des cartes de votre deck jusqu'à ce que 2 cartes Trésor soient dévoilées. Ajoutez ces cartes Trésor à votre main et défaussez les autres cartes dévoilées.";
+		
 		
 	}
 	
-	
+	public String toString() {
+		return super.toString() + "Dévoilez des cartes de votre deck jusqu'à ce que 2 cartes Trésor soient dévoilées. "
+				+ "Ajoutez ces cartes Trésor à votre main et défaussez les autres cartes dévoilées.";
+	}
 
 	
 	public void play(Player p) {

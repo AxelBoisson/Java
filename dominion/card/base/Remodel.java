@@ -12,7 +12,12 @@ import dominion.card.*;
 public class Remodel extends ActionCard {
 	
 	public Remodel() {
-		super("Rénovation",2);
+		super("Rénovation",4);
+	}
+	
+	public String toStrin() {
+		return super.toString() + "Écartez une carte de votre main.\n" + 
+				" * Recevez une carte coûtant jusqu'à 2 Pièces de plus que la carte écartée.";
 	}
 	
 	public void play(Player p) {
@@ -26,7 +31,7 @@ public class Remodel extends ActionCard {
 		if(!decision.equals("")) {
 			c = p.cardsInHand().getCard(decision);
 			p.setDiscard(c);
-			for(int i = 0; i<totalCardAvailable.size()) {
+			for(int i = 0; i<totalCardAvailable.size();i++) {
 				if(totalCardAvailable.get(i).getCost() <= c.getCost()+2) {
 					cardAvailable.add(totalCardAvailable.get(i));
 				}

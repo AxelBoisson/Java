@@ -9,21 +9,31 @@ import dominion.card.*;
  */
 public class Estate extends VictoryCard {
 	
-	private String description;
+	private int victoryPoint;
 	
 	public Estate() { 
-		super("Estate", 2);	
-		this.description = "+1 Victoire";
-		
+		super("Estate", 2);		
+	}
+	
+	public String toString() {
+		return super.toString() + "+1 Victoire";
 	}
 	
 	public int victoryValue(Player p) {
-		return 1;
+		play(p);
+		return this.victoryPoint;
 	}
 
-	@Override
+	
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		CardList totalVictoryCard = new CardList();
+		totalVictoryCard = p.getVictoryCards();
+		int nbEstate = 0;
+		for(int i = 0; i<totalVictoryCard.size();i++) {
+			if(totalVictoryCard.get(i).getName() == "Estate")
+				nbEstate = nbEstate + 1;
+		}
+		this.victoryPoint = nbEstate;
 		
 	}
 }

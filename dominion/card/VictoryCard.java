@@ -10,18 +10,13 @@ public abstract class VictoryCard extends Card {
 	
 	CardType type;
 	
-	private int numCard = 0;
-	
-	
 	public VictoryCard(String name, int cost){
 		super(name,cost);
-		type = CardType.Victory;
-		this.numCard = this.numCard + 1;
-		
+		type = CardType.Victory;	
 	}
 	
 	public String toString(){
-		return super.toString() + this.numCard; 
+		return super.toString() + type; 
 	}
 	
 	public List<CardType> getTypes() {

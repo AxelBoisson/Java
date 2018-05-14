@@ -33,7 +33,7 @@ public class Game {
 	private CardList trashedCards;
 	
 	/**
-	 * Scanner permettant de lire les entr�es au clavier
+	 * Scanner permettant de lire les entrées au clavier
 	 */
 	private Scanner scanner;
 
@@ -52,19 +52,6 @@ public class Game {
 	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
-		if(playerNames.length>=2) {
-			Player p1 = new Player(playerNames[1], this);
-			Player p2 = new Player(playerNames[2], this);
-		}
-		
-		if(playerNames.length>=3) {
-			Player p3 = new Player(playerNames[3], this);
-		}
-		
-		if(playerNames.length == 4) {
-			Player p4 = new Player(playerNames[4],this);
-		}
-		
 		CardList Copper = new CardList();
 		CardList Silver = new CardList();
 		CardList Gold = new CardList();
@@ -80,6 +67,24 @@ public class Game {
 		Duchy duchy = new Duchy();
 		Province province = new Province();
 		Curse curse = new Curse();
+		
+		if(playerNames.length>1){
+			Player p1 = new Player(playerNames[1], this);
+		}
+		
+		if(playerNames.length>=2) {
+			Player p2 = new Player(playerNames[2], this);
+		}
+		
+		if(playerNames.length>=3) {
+			Player p3 = new Player(playerNames[3], this);
+		}
+		
+		if(playerNames.length == 4) {
+			Player p4 = new Player(playerNames[4],this);
+		}
+		
+		
 		
 		kingdomStacks.add(Copper);
 		kingdomStacks.add(Silver);
@@ -122,6 +127,8 @@ public class Game {
 		
 		this.supplyStacks = kingdomStacks;
 
+		
+		
 		
 	}
 	
@@ -330,14 +337,14 @@ public class Game {
 	}
 	
 	/**
-	 * Lit une ligne de l'entr�e standard
+	 * Lit une ligne de l'entrée standard
 	 * 
-	 * C'est cette m�thode qui doit �tre appel�e � chaque fois qu'on veut lire
-	 * l'entr�e clavier de l'utilisateur (par exemple dans Player.choose), ce
+	 * C'est cette méthode qui doit être appelée à chaque fois qu'on veut lire
+	 * l'entrée clavier de l'utilisateur (par exemple dans Player.choose), ce
 	 * qui permet de n'avoir qu'un seul Scanner pour tout le programme
 	 * 
-	 * @return une cha�ne de caract�res correspondant � la ligne suivante de
-	 * l'entr�e standard (sans le retour � la ligne final)
+	 * @return une chaine de caractères correspondant à la ligne suivante de
+	 * l'entrée standard (sans le retour à la ligne final)
 	 */
 	public String readLine() {
 		return this.scanner.nextLine();

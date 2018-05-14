@@ -11,12 +11,15 @@ import dominion.card.*;
  */
 public class Laboratory extends ActionCard {
 	
-	private String description;
+	
 	
 	public Laboratory() {
-		super("Laboratoire",2);
-		this.description = "+2 Cartes. +1 Action";
-		
+		super("Laboratoire",5);
+	}
+	
+	public String toString() {
+		return super.toString() + "+2 Cartes.\n" + 
+				" * +1 Action.";
 	}
 	
 	public void play(Player p) {

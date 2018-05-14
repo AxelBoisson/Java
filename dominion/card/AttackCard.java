@@ -11,17 +11,13 @@ public abstract class AttackCard extends ActionCard {
 	
 	CardType type;
 	
-	private int numCard = 0;
-	
 	public AttackCard(String name, int cost){
 		super(name,cost);
-		type = CardType.Attack;
-		this.numCard = this.numCard + 1;
-		
+		type = CardType.Attack;	
 	}
 	
 	public String toString(){
-		return super.toString() + this.numCard; 
+		return super.toString() + type; 
 	}
 	
 	public List<CardType> getTypes() {

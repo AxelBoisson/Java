@@ -10,17 +10,13 @@ public abstract class TreasureCard extends Card {
 	
 	CardType type;
 	
-	private int numCard = 0;
-	
 	public TreasureCard(String name, int cost){
 		super(name,cost);
 		type = CardType.Treasure;
-		this.numCard = this.numCard + 1;
-		
 	}
 	
 	public String toString(){
-		return super.toString() + this.numCard; 
+		return super.toString() + type; 
 	}
 	
 	public List<CardType> getTypes() {

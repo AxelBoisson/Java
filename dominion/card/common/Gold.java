@@ -9,17 +9,17 @@ import dominion.card.*;
  */
 public class Gold extends TreasureCard {
 	
-	private String description;
-	
 	public Gold() { 
 		super("Gold", 6);	
-		this.description = "+3 Pièces";
+	}
+	
+	public String toString() {
+		return super.toString() + "+3 Pièces";
 	}
 	
 	public int treasureValue() {
 		return 3;
 	}
-
 	
 	public void play(Player p) {
 		p.incrementMoney(3);

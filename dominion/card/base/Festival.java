@@ -11,14 +11,15 @@ import dominion.card.*;
  * +2 Pièces.
  */
 public class Festival extends ActionCard {
-	
-	private String description;
-	
+		
 	public Festival() { 
 		super("Festival", 2);	
-		this.description = " +2 Actions.\n" + 
-				"  +1 Achat.\n" + 
-				"  +2 Pièces.";
+	}
+	
+	public String toString() {
+		return super.toString() + "+2 Actions.\n" + 
+				" * +1 Achat.\n" + 
+				" * +2 Pièces.";
 	}
 	
 	public void play(Player p) {

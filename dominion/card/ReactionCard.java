@@ -10,19 +10,15 @@ import dominion.*;
 public abstract class ReactionCard extends ActionCard {
 	
 	CardType type;
-	
-	private int numCard = 0;
-	
+		
 	
 	public ReactionCard(String name, int cost){
 		super(name,cost);
 		type = CardType.Reaction;
-		this.numCard = this.numCard + 1;
-		
 	}
 	
 	public String toString(){
-		return super.toString() + this.numCard; 
+		return super.toString() + type; 
 	}
 	
 	public List<CardType> getTypes() {

@@ -12,13 +12,14 @@ import dominion.card.*;
  */
 public class Cellar extends ActionCard {
 	
-private String description;
-	
 	public Cellar() { 
 		super("Cave", 2);	
-		this.description = "+1 Action.\n" + 
-				"  Défaussez autant de cartes que vous voulez.\n" + 
-				"  +1 Carte par carte défaussée..";
+	}
+	
+	public String toString() {
+		return super.toString() + "+1 Action.\n" + 
+				" * Défaussez autant de cartes que vous voulez.\n" + 
+				" * +1 Carte par carte défaussée.";
 	}
 	
 	public void play(Player p) {

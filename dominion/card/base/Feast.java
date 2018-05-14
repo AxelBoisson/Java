@@ -15,6 +15,11 @@ public class Feast extends ActionCard {
 		super("Festin", 4);
 	}
 	
+	public String toString() {
+		return super.toString() + "Écartez cette carte.\n" + 
+				" * Recevez une carte coûtant jusqu'à 5 Pièces.";
+	}
+	
 	public void play(Player p) {
 		CardList cardInHand = new CardList();
 		cardInHand = p.cardsInHand();

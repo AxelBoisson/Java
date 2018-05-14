@@ -9,21 +9,30 @@ import dominion.card.*;
  */
 public class Province extends VictoryCard {
 	
-	private String description;
+	private int victoryPoint;
 	
 	public Province() { 
-		super("Province", 8);	
-		this.description = "+6 Victoires";
-		
+		super("Province", 8);			
+	}
+	
+	public String toString() {
+		return super.toString() + "+6 Victoires";
 	}
 	
 	public int victoryValue(Player p) {
-		return 6;
+		play(p);
+		return this.victoryPoint;
 	}
 
-	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		CardList totalVictoryCard = new CardList();
+		totalVictoryCard = p.getVictoryCards();
+		int nbProvince = 0;
+		for(int i = 0; i<totalVictoryCard.size();i++) {
+			if(totalVictoryCard.get(i).getName() == "Province")
+				nbProvince = nbProvince + 6;
+		}
+		this.victoryPoint = nbProvince;
 		
 	}
 }

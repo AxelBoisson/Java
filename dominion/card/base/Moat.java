@@ -12,13 +12,13 @@ import dominion.card.*;
  */
 public class Moat extends ReactionCard {
 	
-	private String description;
-	
 	public Moat (){
 		super("Douves",2);
-		this.description = "Lorsqu’un adversaire joue une carte Attaque,"
-				+ " vous pouvez dévoiler cette carte de votre main."
-				+ " Dans ce cas, l’Attaquen’a pasd’effet sur vous.";
+	}
+	
+	public String toString() {
+		return super.toString() + "+2 Cartes.\n" + 
+				" * Lorsqu’un adversaire joue une carte Attaque, vous pouvez dévoiler cette carte de votre main. Dans ce cas, l’Attaque n’a pas d’effet sur vous.";
 	}
 
 	

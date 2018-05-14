@@ -9,11 +9,12 @@ import dominion.card.*;
  */
 public class Copper extends TreasureCard {
 	
-	private String description;
-	
 	public Copper() { 
 		super("Copper", 0);	
-		this.description = "+1 Pièce";
+	}
+	
+	public String toString() {
+		return super.toString() + "+1 Pièce";
 	}
 	
 	public int treasureValue() {

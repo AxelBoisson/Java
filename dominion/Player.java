@@ -120,6 +120,10 @@ public class Player {
 	public void setDiscard(Card c) {
 		this.discard.add(c);
 	}
+	
+	public void setDraw(Card c){
+		this.draw.add(c);
+	}
 	/**
 	 * Incrémente le nombre d'actions du joueur
 	 * 

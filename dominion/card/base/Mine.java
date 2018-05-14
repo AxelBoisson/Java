@@ -10,11 +10,12 @@ import dominion.card.*;
  */
 public class Mine extends ActionCard {
 	
-	private String description;
-	
 	public Mine() {
 		super("Mine",5);
-		this.description = "Écartez une carte Trésor de votre main. Recevez une carte Trésor coûtant jusqu'à 3 Pièces de plus ; ajoutez cette carte à votre main.";
+	}
+	
+	public String toString() {
+		return super.toString() + "Écartez une carte Trésor de votre main. Recevez une carte Trésor coûtant jusqu'à 3 Pièces de plus ; ajoutez cette carte à votre main.";
 	}
 
 	public void play(Player p) {
