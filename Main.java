@@ -15,13 +15,21 @@ class Main {
 		// Prépare les piles "royaume" de la réserve (hors cartes communes)
 		List<CardList> kingdomStacks = new ArrayList<CardList>();
 		CardList stack;
-		// Ajouter un bloc pour chaque carte royaume à utiliser
-		kingdomStacks.add(stack);
-		stack = new CardList();
+		// Ajouter un bloc d'instructions pour chaque carte royaume à utiliser
+		stack = new CardList();		
 		for (int i = 0; i < 10; i++) {
 			stack.add(new Village());
-		}
-		
+			stack.add(new Cellar());
+			stack.add(new Market());
+			stack.add(new Militia());
+			stack.add(new Mine());
+			stack.add(new Moat());
+			stack.add(new Remodel());
+			stack.add(new Smithy());
+			stack.add(new Woodcutter());
+			stack.add(new Workshop());
+			}		
+		kingdomStacks.add(stack);
 		// Instancie et exécute une partie
 		Game g = new Game(playerNames, kingdomStacks);
 		g.run();
