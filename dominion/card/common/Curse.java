@@ -20,19 +20,20 @@ public class Curse extends CurseCard {
 	}
 	
 	public int victoryValue(Player p) {
-		play(p);
-		return this.victoryPoint;
+	//	play(p);
+		//return this.victoryPoint;
+		return -1;
 	}
 
 	
 	public void play(Player p) {
-		CardList totalVictoryCard = new CardList();
+		/*CardList totalVictoryCard = new CardList();
 		totalVictoryCard = p.getVictoryCards();
 		int nbCurse = 0;
 		for(int i = 0; i<totalVictoryCard.size();i++) {
 			if(totalVictoryCard.get(i).getName() == "Curse")
 				nbCurse = nbCurse + 3;
 		}
-		this.victoryPoint = nbCurse;
+		this.victoryPoint = nbCurse;*/
 	}
 }

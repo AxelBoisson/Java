@@ -71,23 +71,26 @@ public class Player {
 	public Player(String name, Game game) {
 		this.name = name;
 		this.game = game;
+		this.actions = 0;
+		this.money = 0;
+		this.buys = 0;
 		
 		this.hand = new CardList();
 		this.discard = new CardList();
 		this.draw = new CardList();
 		this.inPlay = new CardList();
 		
-		Estate estate=new Estate();
-		Copper copper=new Copper();
+		Estate estate = new Estate();
+		Copper copper = new Copper();
 		
 		for(int i=0; i<3; i++) 
-			discard.add(estate);
+			this.discard.add(estate);
 		
 		for(int i=0; i<7; i++) 
-			discard.add(copper);
+			this.discard.add(copper);
 		
 		for(int i=0; i<5; i++) 
-			drawCard();
+			this.hand.add(drawCard());
 	}
 
 	/**
@@ -124,6 +127,12 @@ public class Player {
 	public void setDraw(Card c){
 		this.draw.add(c);
 	}
+	
+	public void setInPlay(Card c){
+		this.inPlay.add(c);
+	}
+	
+	
 	/**
 	 * Incrémente le nombre d'actions du joueur
 	 * 
@@ -161,7 +170,7 @@ public class Player {
 	 */
 	public CardList cardsInHand() {
 		CardList hand = new CardList();
-		hand = this.hand;
+		hand.addAll(this.hand);
 		return hand;
 	}
 	
@@ -172,10 +181,10 @@ public class Player {
 	 */
 	public CardList totalCards() {
 		CardList total = new CardList();
-		total.addAll(hand);
-		total.addAll(discard);
-		total.addAll(draw);
-		total.addAll(inPlay);
+		total.addAll(this.hand);
+		total.addAll(this.discard);
+		total.addAll(this.draw);
+		total.addAll(this.inPlay);
 		return total;
 		
 	}
@@ -192,7 +201,7 @@ public class Player {
 		CardList total = new CardList();
 		total = totalCards();
 		for(int i = 0; i<total.size();i++){
-			victoire = total.get(i).victoryValue(this);
+			victoire = victoire + total.get(i).victoryValue(this);
 		}
 			return victoire;
 	}
@@ -210,7 +219,7 @@ public class Player {
 	 */
 	public List<Player> otherPlayers() {
 		List<Player> other = new ArrayList<Player>();
-		other =  this.game.otherPlayers(this);
+		other.addAll(this.game.otherPlayers(this));
 		return other;
 	}
 	
@@ -225,15 +234,18 @@ public class Player {
 	 * @return la carte piochée, {@code null} si aucune carte disponible
 	 */
 	public Card drawCard() {
-		Card draw;
-		if(this.draw == null){
+		Card c;
+		if(this.draw.isEmpty() && this.discard.isEmpty()){
+			return null;
+		}
+		if(this.draw.isEmpty()) {
 			this.discard.shuffle();
 			this.draw.addAll(discard);
 			this.discard.clear();
 		}
-		draw = this.draw.get(0);
+		c = this.draw.get(0);
 		this.draw.remove(0);
-		return draw;
+		return c;
 	}
 	
 	/**
@@ -263,8 +275,10 @@ public class Player {
 		List<CardType> type = new ArrayList<CardType>();
 		for(int i = 0; i<cardsInHand().size();i++){
 			type = cardsInHand().get(i).getTypes();
-			if(type.get(i) == CardType.Treasure)
-				treasureCards.add(cardsInHand().get(i));
+			for(int j = 0; j<type.size();j++) {
+				if(type.get(j) == CardType.Treasure)
+					treasureCards.add(cardsInHand().get(i));
+			}
 		}
 		return treasureCards;
 		
@@ -278,8 +292,10 @@ public class Player {
 		List<CardType> type = new ArrayList<CardType>();
 		for(int i = 0; i<cardsInHand().size();i++){
 			type = cardsInHand().get(i).getTypes();
-			if(type.get(i) == CardType.Action)
-				actionCards.add(cardsInHand().get(i));
+			for(int j = 0; j<type.size();j++) {
+				if(type.get(j) == CardType.Action)
+					actionCards.add(cardsInHand().get(i));
+			}
 		}
 		return actionCards;
 	}
@@ -292,8 +308,10 @@ public class Player {
 		List<CardType> type = new ArrayList<CardType>();
 		for(int i = 0; i<cardsInHand().size();i++){
 			type = cardsInHand().get(i).getTypes();
-			if(type.get(i) == CardType.Victory)
+			for(int j = 0; j<type.size();j++) {
+			if(type.get(j) == CardType.Victory)
 				victoryCards.add(cardsInHand().get(i));
+			}
 		}
 		return victoryCards;
 	}
@@ -391,10 +409,11 @@ public class Player {
 		buy = this.game.getFromSupply(cardName);
 		int cost;
 		cost = buy.getCost();
-		if(this.money >= cost && getBuys()<=1) {
-			incrementMoney(-cost);
-			incrementMoney(-1);
-			return gain(cardName);
+		if(this.money >= cost && this.buys >= 1) {
+			this.money = this.money - cost;
+			incrementBuys(-1);
+			this.discard.add(buy);
+			return buy;
 		}
 		return null;
 		

@@ -21,10 +21,8 @@ public class Copper extends TreasureCard {
 		return 1;
 	}
 
-	
 	public void play(Player p) {
 		p.incrementMoney(1);
-		
 	}
 
 	

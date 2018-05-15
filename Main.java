@@ -14,7 +14,7 @@ class Main {
 		String[] playerNames = new String[]{"Marco", "Polo"};
 		// Prépare les piles "royaume" de la réserve (hors cartes communes)
 		List<CardList> kingdomStacks = new ArrayList<CardList>();
-		CardList stack;
+		CardList stack = new CardList();
 		// Ajouter un bloc pour chaque carte royaume à utiliser
 		kingdomStacks.add(stack);
 		stack = new CardList();

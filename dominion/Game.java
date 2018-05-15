@@ -51,7 +51,44 @@ public class Game {
 	 * - 30 Gold
 	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
-	public Game(String[] playerNames, List<CardList> kingdomStacks) {
+	public Game(String[] playerNames, List<CardList> kingdomStacks) {	
+		
+		this.players = new Player[playerNames.length];
+		this.supplyStacks = new ArrayList<CardList>();
+		
+		if(playerNames.length == 1){
+			Player p1 = new Player(playerNames[0], this);
+			this.players[0] = p1;
+		}
+		
+		else if(playerNames.length == 2) {
+			Player p1 = new Player(playerNames[0], this);
+			Player p2 = new Player(playerNames[1], this);
+			this.players[0] = p1;
+			this.players[1] = p2;
+			
+		}
+		
+		else if(playerNames.length == 3) {
+			Player p1 = new Player(playerNames[0], this);
+			Player p2 = new Player(playerNames[1], this);
+			Player p3 = new Player(playerNames[2], this);
+			this.players[0] = p1;
+			this.players[1] = p2;
+			this.players[2] = p3;
+		}
+		
+		else if(playerNames.length == 4) {
+			Player p1 = new Player(playerNames[0], this);
+			Player p2 = new Player(playerNames[1], this);
+			Player p3 = new Player(playerNames[2], this);
+			Player p4 = new Player(playerNames[3], this);
+			this.players[0] = p1;
+			this.players[1] = p2;
+			this.players[2] = p3;
+			this.players[3] = p4;
+		}
+		
 		CardList Copper = new CardList();
 		CardList Silver = new CardList();
 		CardList Gold = new CardList();
@@ -68,68 +105,49 @@ public class Game {
 		Province province = new Province();
 		Curse curse = new Curse();
 		
-		if(playerNames.length>1){
-			Player p1 = new Player(playerNames[1], this);
-		}
-		
-		if(playerNames.length>=2) {
-			Player p2 = new Player(playerNames[2], this);
-		}
-		
-		if(playerNames.length>=3) {
-			Player p3 = new Player(playerNames[3], this);
-		}
-		
-		if(playerNames.length == 4) {
-			Player p4 = new Player(playerNames[4],this);
-		}
-		
-		
-		
 		kingdomStacks.add(Copper);
 		kingdomStacks.add(Silver);
 		kingdomStacks.add(Gold);
+		
+		
+		
+		for(int i = 0;i < 60;i++) 
+			kingdomStacks.get(kingdomStacks.size()-3).add(copper);
+		
+		for(int i = 0;i < 40;i++) 
+			kingdomStacks.get(kingdomStacks.size()-2).add(silver);
+		
+		for(int i = 0;i < 30;i++) 
+			kingdomStacks.get(kingdomStacks.size()-1).add(gold);
 		
 		kingdomStacks.add(Estate);
 		kingdomStacks.add(Duchy);
 		kingdomStacks.add(Province);
 		
-		for(int i=0;i<60;i++) 
-			kingdomStacks.get(kingdomStacks.size()-3).add(copper);
-		
-		for(int i=0;i<40;i++) 
-			kingdomStacks.get(kingdomStacks.size()-2).add(silver);
-		
-		for(int i=0;i<30;i++) 
-			kingdomStacks.get(kingdomStacks.size()-1).add(gold);
-		
-		
-		if(playerNames.length==2) {
-			for(int i=0;i<8;i++) {
+		if(playerNames.length == 2) {
+			for(int i = 0;i < 8;i++) {
 				kingdomStacks.get(kingdomStacks.size()-3).add(estate);
 				kingdomStacks.get(kingdomStacks.size()-2).add(duchy);
 				kingdomStacks.get(kingdomStacks.size()-1).add(province);
 			}
 			
 		}
-		if(playerNames.length>2) {
-			for(int i=0;i<12;i++) {
+		
+		if(playerNames.length > 2) {
+			for(int i = 0;i < 12;i++) {
 				kingdomStacks.get(kingdomStacks.size()-3).add(estate);
 				kingdomStacks.get(kingdomStacks.size()-2).add(duchy);
 				kingdomStacks.get(kingdomStacks.size()-1).add(province);
 			}
 			
 		}
+		
 		kingdomStacks.add(Curse);
 		for(int i=0;i<(playerNames.length-1)*10;i++) {
 			kingdomStacks.get(kingdomStacks.size()-1).add(curse);
 		}
 		
-		this.supplyStacks = kingdomStacks;
-
-		
-		
-		
+		this.supplyStacks.addAll(kingdomStacks);
 	}
 	
 	/**
@@ -147,8 +165,6 @@ public class Game {
 		this.trashedCards.add(c);
 	}
 	
-	
-	
 	/**
 	 * Renvoie le nombre de joueurs participant à la partie
 	 */
@@ -161,7 +177,7 @@ public class Game {
 	 * joueurs, ou -1 si le joueur n'est pas dans le tableau.
 	 */
 	private int indexOfPlayer(Player p) {
-		for(int i = 0; i<this.players.length;i++) {
+		for(int i = 0; i < this.players.length;i++) {
 			if(p.equals(this.players[i]))
 				return i;
 		}
@@ -184,13 +200,12 @@ public class Game {
 		List<Player> adversary = new ArrayList<Player>();
 		int index = indexOfPlayer(p);
 		int i,j;
-		for(i = index; i<this.players.length;i++)
-			adversary.add(this.players[i]);
+		for(i = index; i<this.players.length-1;i++)
+			adversary.add(this.players[i+1]);
 		
-		for(j=0;j<index;j++)
+		for(j = 0;j < index;j++)
 			adversary.add(this.players[j]);
 		
-	
 		return adversary;
 	}
 	
@@ -204,13 +219,12 @@ public class Game {
 	public CardList availableSupplyCards() {
 		CardList available = new CardList();
 		
-		for(int i = 0;i<this.supplyStacks.size();i++) {
-			if(this.supplyStacks.get(i) != null)
+		for(int i = 0;i < this.supplyStacks.size();i++) {
+			if(!this.supplyStacks.get(i).isEmpty()){
 				available.add(this.supplyStacks.get(i).get(0));
+			}
 		}
-		
-		return available;
-			
+		return available;	
 	}
 	
 	/**
@@ -247,14 +261,13 @@ public class Game {
 	 * @return la carte trouvée dans la réserve ou {@code null} si aucune carte 
 	 * ne correspond
 	 */
-	public Card getFromSupply(String cardName) {
-		CardList available = new CardList();
-		available = availableSupplyCards();
-		
-		for(int i = 0; i<available.size();i++) {
-			if(available.get(i).getName() == cardName)
-				return available.get(i);
-			
+	public Card getFromSupply(String cardName) {	
+		for(int i = 0; i<this.supplyStacks.size();i++) {
+			for(int j = 0; j<this.supplyStacks.get(i).size(); j++){
+				if(this.supplyStacks.get(i).get(j).getName().equals(cardName)){
+					return this.supplyStacks.get(i).get(j);
+				}
+			}
 		}
 		return null;
 	}
@@ -267,17 +280,18 @@ public class Game {
 	 * ne correspond au nom passé en argument
 	 */
 	public Card removeFromSupply(String cardName) {
-		CardList supply = new CardList();
 		Card remove;
-		supply = availableSupplyCards();
-		
-		for(int i = 0; i<supply.size();i++) {
-			if(supply.get(i).getName() == cardName) {
-				remove = supply.get(i);
-				supply.remove(cardName);
-				return remove;
+		for(int i = 0; i<this.supplyStacks.size();i++) {
+			for(int j = 0; j<this.supplyStacks.get(i).size();j++){
+				if(this.supplyStacks.get(i).get(j).getName().equals(cardName)) {
+					remove = this.supplyStacks.get(i).get(j);
+					this.supplyStacks.get(i).remove(this.supplyStacks.get(i).get(j));
+					if(this.supplyStacks.get(i).size() == 0){
+						this.supplyStacks.remove(i);
+					}
+					return remove;
+				}
 			}
-			
 		}
 		return null;
 	}
@@ -294,21 +308,13 @@ public class Game {
 	 * c'est que la partie est terminée)
 	 */
 	public boolean isFinished() {
-		List<CardList> supply = new ArrayList<CardList>();
-		int empty = 0;
-		supply = this.supplyStacks;
-		
-		for(int i = 0; i<supply.size(); i++) {
-			if(supply.get(i).isEmpty())
-				empty++;
-			if(empty>=3)
-				return true;
-			if(supply.get(i).get(0).getName().equals("Province"))
-				return true;
+		if(this.supplyStacks.size() <= 4)
+			return true;
+		for(int i = 0; i<this.supplyStacks.size(); i++) {						
+			if(this.supplyStacks.get(i).get(0).getName().equals("Province"))
+				return false;			
 		}
-		return false;
-		
-			
+		return true;	
 	}
 	
 	/**
