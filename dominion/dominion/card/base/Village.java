@@ -22,7 +22,7 @@ public class Village extends ActionCard {
 	
 	public void play(Player p) {
 		p.incrementActions(2);
-		p.drawCard();
+		p.setHand(p.drawCard());
 		
 	}
 	

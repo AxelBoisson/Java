@@ -30,15 +30,18 @@ public class Mine extends ActionCard {
 		cardAvailable = p.getGame().availableSupplyCards();
 		if(cardTreasurePlayer.size()!=0) {
 			decision = p.chooseCard("Choisissez la carte trésor que vous voulez écarter", cardTreasurePlayer, true);
-			if(!decision.equals("")) {
+			if(decision != "") {
 				c = cardTreasurePlayer.getCard(decision);
 				p.getGame().setTrashCard(c);
+				p.removeHand(c.getName());
 				i = c.getCost();
+				
 				for(int j = 0; j<cardAvailable.size();j++) {
 					if(cardAvailable.get(j).getCost() <= i+3) {
 						cardTreasureAvailable.add(cardAvailable.get(j));
 					}
 				}
+				
 				decision = p.chooseCard("Choisissez la carte trésor que vous voulez recevoir",cardTreasureAvailable, true);
 				if(!decision.equals(""))
 					p.setHand(cardTreasureAvailable.getCard(decision));

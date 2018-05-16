@@ -14,7 +14,7 @@ public class Laboratory extends ActionCard {
 	
 	
 	public Laboratory() {
-		super("Laboratoire",5);
+		super("Laboratory",5);
 	}
 	
 	public String toString() {
@@ -23,8 +23,9 @@ public class Laboratory extends ActionCard {
 	}
 	
 	public void play(Player p) {
-		p.drawCard();
-		p.drawCard();
+		for(int i = 0; i<2;i++){
+			p.setHand(p.drawCard());
+		}
 		
 		p.incrementActions(1);
 	}

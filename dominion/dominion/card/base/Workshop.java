@@ -11,7 +11,7 @@ import dominion.card.*;
 public class Workshop extends ActionCard {
 	
 	public Workshop() {
-		super("Atelier",3);
+		super("Workshop",3);
 	}
 	
 	public String toString() {
@@ -28,11 +28,7 @@ public class Workshop extends ActionCard {
 			if(supplyCard.get(i).getCost()<=4) {
 				cardAvailable.add(supplyCard.get(i));
 			}
-		}
-		
-		for(int i = 0; i<cardAvailable.size();i++) {
-			System.out.println(cardAvailable.get(i).getName());
-		}
+		}	
 		
 		reponse = p.chooseCard("Choisissez la carte parmis celle disponible", cardAvailable, false);
 		p.gain(reponse);

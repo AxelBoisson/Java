@@ -14,7 +14,7 @@ import dominion.card.*;
 public class Market extends ActionCard {
 	
 	public Market() {
-		super("Marché",5);
+		super("Market",5);
 	}
 	
 	public String toString() {
@@ -25,7 +25,8 @@ public class Market extends ActionCard {
 	}
 	
 	public void play(Player p) {
-		p.drawCard();
+		p.setHand(p.drawCard());
+		
 		p.incrementActions(1);
 		p.incrementBuys(1);
 		p.incrementMoney(1);

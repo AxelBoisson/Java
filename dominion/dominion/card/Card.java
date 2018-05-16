@@ -48,6 +48,7 @@ public abstract class Card {
 		List<CardType> list = new ArrayList<CardType>();
 		return list;
 	}
+
 	
 	/**
 	 * Renvoie une représentation de la carte sous forme de chaîne de caractères
@@ -78,19 +79,7 @@ public abstract class Card {
 	 * non nulle).
 	 */
 	public int victoryValue(Player p) {
-		int nbVictory = 0;
-		
-		CardList totalCardPlayer = new CardList();
-		List<CardType> type;
-		
-		totalCardPlayer = p.totalCards();
-		
-		for(int i = 0;i<totalCardPlayer.size();i++) {
-			type = totalCardPlayer.get(i).getTypes();
-			if(type.get(i) == CardType.Victory)
-				nbVictory = nbVictory + totalCardPlayer.get(i).victoryValue(p);
-		}
-		return nbVictory;
+		return 0;
 	}
 }
 

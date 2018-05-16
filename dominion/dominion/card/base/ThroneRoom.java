@@ -12,7 +12,7 @@ import dominion.card.*;
 public class ThroneRoom extends ActionCard {
 	
 	public ThroneRoom() {	
-		super("Salle du trône",4);
+		super("Throne Room",4);
 	}
 	
 	public String toString() {
@@ -28,7 +28,7 @@ public class ThroneRoom extends ActionCard {
 		
 		String decision;
 		
-		decision = p.chooseCard("Choisissez une cartion de votre main", actionInHand, false);
+		decision = p.chooseCard("Choisissez une carte Action de votre main", actionInHand, false);
 		
 		for(int i = 0; i<2;i++)
 			p.playCard(decision);

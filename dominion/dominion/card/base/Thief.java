@@ -14,7 +14,7 @@ import dominion.card.*;
 public class Thief extends AttackCard {
 	
 	public Thief(){
-		super("Voleur",4);
+		super("Thief",4);
 	}
 	
 	public String toString() {

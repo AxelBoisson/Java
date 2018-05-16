@@ -7,12 +7,12 @@ import dominion.card.*;
  * Carte Chancellier (Chancellor)
  * 
  * +2 Pièces.
- * Vous pouvez immédiatement défausser votre deck.
+ * Vous pouvez immédiatement défausser votre deck (pioche).
  */
 public class Chancellor extends ActionCard {
 	
 	public Chancellor() { 
-		super("Chancellier", 3);	
+		super("Chancellor", 3);	
 	}
 	
 	public String toString() {
@@ -26,17 +26,19 @@ public class Chancellor extends ActionCard {
 		List<String> choice = new ArrayList<String>();
 		choice.add("y");
 		choice.add("n");
-		String decision;
-		Card c;
-		CardList total = new CardList();
-		total = p.totalCards();
-		
+		String decision = "init";
+		CardList totalDraw = new CardList();
+		for(Card c : p.getDraw()){
+			if(c != null){
+				totalDraw.add(c);
+			}
+		}
+
 		decision = p.choose("Voulez vous défausser votre deck", choice, false);
 		
-		for(int i = 0;i < total.size();i++) {
-				if(decision.equals("y")){
-					c = total.get(i);
-					p.setDiscard(c);
+		if(decision != "" && decision.equalsIgnoreCase("y")){
+			for(int i = 0;i < totalDraw.size();i++) {
+				p.setDiscard(p.drawCard());
 			}
 		}
 		

@@ -13,28 +13,24 @@ public class Moneylender extends ActionCard {
 	
 	
 	public Moneylender() {
-		super("Prêteur sur gages",4);
+		super("Moneylender",4);
 	}
 	
 	public String toString() {
-		return super.toString() + " Écartez une carte Cuivre de votre main.\n" + 
-				" * Dans ce cas, +3 Pièces.";
+		return super.toString() + " Écartez une carte Cuivre de votre main.\n" + "Dans ce cas, +3 Pièces.";
 	}
 	
 	public void play(Player p) {
 		
-		CardList inHand = new CardList();
-		
-		inHand = p.cardsInHand();
-		Card c;
+		CardList treasureCard = new CardList();
+		treasureCard = p.getTreasureCards();
 		int i = 0;
-		boolean cardFind = false;
-		while( i < inHand.size() && cardFind == false) {
-			c = inHand.get(i);
-			if(c.getName().equals("Copper")) {
+		boolean stop = false;
+		while( i < p.getTreasureCards().size() && stop == false) {
+			if(treasureCard.get(i).getName().equals("Copper")) {		
+				p.removeHand(treasureCard.get(i).getName());
 				p.incrementMoney(3);
-				p.getGame().setTrashCard(c);
-				cardFind = true;
+				stop = true;
 			}
 			i++;
 		}

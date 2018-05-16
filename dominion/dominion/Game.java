@@ -109,8 +109,6 @@ public class Game {
 		kingdomStacks.add(Silver);
 		kingdomStacks.add(Gold);
 		
-		
-		
 		for(int i = 0;i < 60;i++) 
 			kingdomStacks.get(kingdomStacks.size()-3).add(copper);
 		
@@ -217,8 +215,7 @@ public class Game {
 	 * non-vide de la réserve (cartes royaume et cartes communes)
 	 */
 	public CardList availableSupplyCards() {
-		CardList available = new CardList();
-		
+		CardList available = new CardList();	
 		for(int i = 0;i < this.supplyStacks.size();i++) {
 			if(!this.supplyStacks.get(i).isEmpty()){
 				available.add(this.supplyStacks.get(i).get(0));

@@ -13,7 +13,7 @@ import dominion.card.*;
 public class Bureaucrat extends AttackCard {
 	
 	public Bureaucrat(){
-		super("Bureaucrate",4);
+		super("Bureaucrat",4);
 	}
 	
 	public String toString() {
@@ -26,27 +26,19 @@ public class Bureaucrat extends AttackCard {
 		List<Player> adversary = new ArrayList<Player>();
 		adversary = p.getGame().otherPlayers(p);
 		CardList victoryCardPlayer = new CardList();
-		CardList cardInHand = new CardList();
-		String decision;
-		Card c;
-		c = p.gain("Silver");
-		p.setDraw(c);
+		String decision = "noChoice";
+		
+		p.setDraw(p.getGame().getFromSupply("Silver"));
 		
 		for(int i = 0; i<adversary.size(); i++){
-			victoryCardPlayer = adversary.get(i).getTreasureCards();
-			if(!victoryCardPlayer.isEmpty()){
+			victoryCardPlayer = adversary.get(i).getVictoryCards();
+			if(victoryCardPlayer.size() != 0){
 				decision = adversary.get(i).chooseCard("Choisissez la carte trésor que vous voulez dévoiler puis placer là sur votre deck", victoryCardPlayer, false);
-				
 				adversary.get(i).setDraw(victoryCardPlayer.getCard(decision));
+				adversary.get(i).removeHand(victoryCardPlayer.getCard(decision).getName());
 			}
-			else{
-				cardInHand = adversary.get(i).cardsInHand();
-				for(int j = 0; j<cardInHand.size();j++){
-					
-				}
-			}
-		}
-		
+			
+		}		
 		
 	}
 }

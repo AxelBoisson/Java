@@ -13,7 +13,7 @@ import dominion.card.*;
 public class Cellar extends ActionCard {
 	
 	public Cellar() { 
-		super("Cave", 2);	
+		super("Cellar", 2);	
 	}
 	
 	public String toString() {
@@ -27,16 +27,22 @@ public class Cellar extends ActionCard {
 		
 		String decision = "noChoice";
 		CardList cardInHand = new CardList();
-		
+		boolean stop = false;
 		cardInHand = p.cardsInHand();
 		
 		int i = 0;
-		while(i < cardInHand.size()) {
-			decision = p.chooseCard("Entrez le nom de la carte que vous voulez défausser, appuyez sur entrée directement pour ne pas la défausser", cardInHand, true);
-			if(!decision.equals(""))
-				p.setDiscard(cardInHand.get(i));
+		while(i < cardInHand.size() && stop == false) {
+			decision = p.chooseCard("Entrez le nom de la carte que vous voulez défausser, appuyez sur entrée directement pour arrêter de défausser", cardInHand, true);
+			if(decision != ""){
+				p.setDiscard(cardInHand.getCard(decision));
+				p.removeHand(decision);
+				p.setHand(p.drawCard());
+			}
+			else
+				stop = true;
 			i++;
 		}
+		
 	}
 	
 }

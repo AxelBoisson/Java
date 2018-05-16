@@ -11,7 +11,7 @@ import dominion.card.*;
 public class Library extends ActionCard {
 	
 	public Library() {
-		super("Bibliothèque",5);
+		super("Library",5);
 	}
 	
 	public String toString() {

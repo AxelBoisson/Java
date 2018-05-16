@@ -14,7 +14,7 @@ public class CouncilRoom extends ActionCard {
 	
 	
 	public CouncilRoom() { 
-		super("Chambre du conseil", 2);		
+		super("Council Room", 2);		
 	}
 	
 	public String toString() {
@@ -27,13 +27,13 @@ public class CouncilRoom extends ActionCard {
 		p.incrementBuys(1);
 		
 		for(int i = 0; i<4; i++)
-			p.drawCard();
+			p.setHand(p.drawCard());
 		
 		List<Player> other = new ArrayList<Player>();
 		other = p.getGame().otherPlayers(p);
 		
 		for(int i = 0; i<other.size();i++)
-			other.get(i).drawCard();
+			other.get(i).setHand(other.get(i).drawCard());
 		
 	}
 	

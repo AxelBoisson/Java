@@ -12,21 +12,23 @@ import dominion.card.*;
 public class Witch extends AttackCard {
 	
 	public Witch() {
-		super("Sorcière", 5);
+		super("Witch", 5);
 	}
 	
 	public String toString() {
 		return super.toString() + "+2 Cartes.\n" + 
-				" * Tous vos adversaires recoivent une carte Curse.";
+				"Tous vos adversaires recoivent une carte Curse.";
 	}
 	
 	public void play(Player p) {
-		Card c;
+		for(int i = 0; i<2; i++)
+			p.setHand(p.drawCard());
+		
+		Card c = p.getGame().getFromSupply("Curse");
 		for(int i=0;i<p.otherPlayers().size();i++) {
-			c=p.otherPlayers().get(i).getGame().getFromSupply("Curse");
 			if(c!=null) {
-				p.otherPlayers().get(i).setHand(c);
-				p.otherPlayers().get(i).getGame().removeFromSupply("curse");
+				p.otherPlayers().get(i).setDiscard(c);
+				p.otherPlayers().get(i).getGame().removeFromSupply("Curse");
 			}
 		}
 	}

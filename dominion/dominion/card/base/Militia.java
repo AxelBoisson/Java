@@ -11,47 +11,34 @@ import dominion.card.*;
  */
 public class Militia extends AttackCard {
 	
-
-	
 	public Militia() {
-		super("Milice", 4);
+		super("Militia", 4);
 	}
 	
 	public String toString() {
 		return super.toString() + "2 Pièces.\n" + 
-				" * Tous vos adversaires défaussent leurs cartes de façon à n'avoir que 3 cartes en main.";
+				"Tous vos adversaires défaussent leurs cartes de façon à n'avoir que 3 cartes en main.";
 	}
 	
 	public void play(Player p) {
 		p.incrementMoney(2);
-		int i = 1;
-		int j = 1;
+		
 		List<Player> playerList = new ArrayList<Player>();
 		playerList = p.getGame().otherPlayers(p);
-		while(i<=playerList.size()) {
-			playerList.add(p.getGame().otherPlayers(p).get(i));
-			i++;
-		}
 		
-		while(j<playerList.size()) {
+		for(int i=0;i<playerList.size();i++) {
 			Player P;
 			String decision;
 			Card c;
 			
-			P = playerList.get(j);
+			P = playerList.get(i);
 			
 			while(P.cardsInHand().size()>3) {
 				decision = P.chooseCard("Choisissez la carte que vous voulez défausser", P.cardsInHand(), false);
 				c = P.cardsInHand().getCard(decision);
-				P.cardsInHand().remove(decision);
 				P.setDiscard(c);
-				
-			}
-			
-			
-		}
-			
-		
+				P.removeHand(decision);			
+			}		
+		}		
 	}
-	
 }

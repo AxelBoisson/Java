@@ -116,6 +116,10 @@ public class Player {
 		return this.game;
 	}
 	
+	public CardType playedCard(Card c){
+		return c.getTypes().get(0);
+	}
+	
 	public void setHand(Card c) {
 		this.hand.add(c);
 	}
@@ -132,6 +136,28 @@ public class Player {
 		this.inPlay.add(c);
 	}
 	
+	public CardList getDraw(){
+		return this.draw;
+	}
+	
+	public CardList getDiscard() {
+		return this.discard;
+	}
+	
+	public CardList getHand() {
+		return this.hand;
+	}
+	
+	public void removeHand(String cardName){
+		this.hand.remove(cardName);
+	}
+	
+	
+	public void showCard(CardList c){
+		for(int i = 0; i<c.size();i++){
+			System.out.println(c.get(i));
+		}
+	}
 	
 	/**
 	 * Incrémente le nombre d'actions du joueur
@@ -357,6 +383,8 @@ public class Player {
 			i++;
 		}
 	}
+	
+	
 	
 	/**
 	 * Le joueur gagne une carte.
@@ -616,7 +644,7 @@ public class Player {
 		
 		decision = "noChoice";
 		while(this.buys >= 1 && decision != "") {
-			decision = chooseCard("Choisissez la carte dans la r�serve que vous souhaitez acheter", this.game.availableSupplyCards(),true);
+			decision = chooseCard("Choisissez la carte dans la réserve que vous souhaitez acheter", this.game.availableSupplyCards(),true);
 			if(decision != "") {
 				buyCard(decision);
 				incrementBuys(-1);	
