@@ -26,21 +26,24 @@ public class Adventurer extends ActionCard {
 	
 	public void play(Player p) {
 		Card card; 
-		
-		card = p.drawCard();
 		int i = 0;
 		int nbTreasure = 0;
+		boolean treasure = false;
 		while(nbTreasure < 2 ) {
 			i = 0;
-			while(i<card.getTypes().size()) {
-				if(card.getTypes().get(i) == CardType.Treasure) {
+			treasure = false;
+			card = p.drawCard();
+			while(i<card.getTypes().size() && treasure == false) {
+				if(card.getTypes().get(0) == CardType.Treasure) {
 					p.setHand(card);
+					treasure = true;
 					nbTreasure++;
 				}
-				else
-					p.gain(card);
 				i++;
 			}
+			if(treasure == false)
+				p.gain(card);
+			
 		}
 	}
 	

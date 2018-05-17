@@ -16,7 +16,7 @@ public class Duchy extends VictoryCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "+3 Victoires";
+		return super.toString() + " +3 Victoires";
 	}
 	
 	public int victoryValue(Player p) {

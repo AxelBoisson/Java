@@ -44,10 +44,10 @@ public class Moat extends ReactionCard {
 		String decision;
 		
 		for(int i = 0; i<adversary.size();i++){
-			playCard = adversary.get(i).cardsInHand().get(0);
-			if (adversary.get(i).playedCard(playCard) == CardType.Attack){
-				decision = p.choose("Voulez-vous dévoiler votre carte Réaction ?", choice, true);
-				if(decision != "" && decision.equalsIgnoreCase("y")){
+			playCard = adversary.get(i).getInPlay().get(0);
+			if (playCard.getTypes().get(0) == CardType.Attack){
+				decision = p.choose("Voulez-vous dévoiler votre carte Réaction ?", choice, false);
+				if(decision.equalsIgnoreCase("y")){
 					this.reaction = true;
 				}
 				else

@@ -16,7 +16,7 @@ public abstract class CurseCard extends Card {
 	}
 	
 	public String toString(){
-		return super.toString() + type; 
+		return super.toString() + " " + type;
 	}
 	
 	public List<CardType> getTypes() {

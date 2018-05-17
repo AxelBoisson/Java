@@ -16,22 +16,34 @@ public class ThroneRoom extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "Choisissez 1 carte Action de votre main.\n" + 
-				" * Jouez-la deux fois.";
+		return super.toString() + " Choisissez 1 carte Action de votre main.\n" + 
+				" Jouez-la deux fois.";
 	}
 	
 	public void play(Player p) {
 		
 		CardList actionInHand = new CardList();
-		
+		Card c1,c2;
 		actionInHand = p.getActionCards();
 		
-		String decision;
+		String decision = "";
 		
-		decision = p.chooseCard("Choisissez une carte Action de votre main", actionInHand, false);
+		if(!actionInHand.isEmpty()) {
+			if(actionInHand.size()>2) {
+				decision = p.chooseCard("Choisissez une carte Action de votre main", actionInHand, false);
+			}
+			else {
+				actionInHand.remove("Throne Room");
+				decision = p.chooseCard("Choisissez une carte Action de votre main", actionInHand, false);
+			}
+			
+			c1 = actionInHand.getCard(decision);
+			c2 = c1;
+			p.playCard(c1);
+			p.playCard(c2);
+		}
 		
-		for(int i = 0; i<2;i++)
-			p.playCard(decision);
+		
 	}
 	
 }

@@ -116,10 +116,6 @@ public class Player {
 		return this.game;
 	}
 	
-	public CardType playedCard(Card c){
-		return c.getTypes().get(0);
-	}
-	
 	public void setHand(Card c) {
 		this.hand.add(c);
 	}
@@ -148,16 +144,26 @@ public class Player {
 		return this.hand;
 	}
 	
+	public CardList getInPlay(){
+		return this.inPlay;
+	}
+	
 	public void removeHand(String cardName){
 		this.hand.remove(cardName);
 	}
 	
-	
-	public void showCard(CardList c){
-		for(int i = 0; i<c.size();i++){
-			System.out.println(c.get(i));
-		}
+	public void removeDiscard(String cardName){
+		this.discard.remove(cardName);
 	}
+	
+	public void removeDraw(String cardName) {
+		this.draw.remove(cardName);
+	}
+	
+	public void removeInPlay(String cardName){
+		this.inPlay.remove(cardName);
+	}
+	
 	
 	/**
 	 * Incrémente le nombre d'actions du joueur
@@ -413,7 +419,7 @@ public class Player {
 	public Card gain(String cardName) {
 		Card gain;
 		gain = this.game.getFromSupply(cardName);
-		discard.add(gain);
+		this.discard.add(gain);
 		gain = this.game.removeFromSupply(cardName);
 		return gain;
 	}

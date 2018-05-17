@@ -55,7 +55,7 @@ public abstract class Card {
 	 * (ici la fonction renvoie le nom de la carte)
 	 */
 	public String toString() {
-		return this.name;
+		return this.name + " ";
 	}
 	
 	/**
@@ -81,6 +81,7 @@ public abstract class Card {
 	public int victoryValue(Player p) {
 		return 0;
 	}
+	
 }
 
 

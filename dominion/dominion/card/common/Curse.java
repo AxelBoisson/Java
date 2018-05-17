@@ -16,7 +16,7 @@ public class Curse extends CurseCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "1 Victoire";
+		return super.toString() + " -1 Victoire";
 	}
 	
 	public int victoryValue(Player p) {

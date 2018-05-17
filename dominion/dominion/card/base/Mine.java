@@ -15,38 +15,36 @@ public class Mine extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "Écartez une carte Trésor de votre main. Recevez une carte Trésor coûtant jusqu'à 3 Pièces de plus ; ajoutez cette carte à votre main.";
+		return super.toString() + " " + "Écartez une carte Trésor de votre main. "
+				+ "Recevez une carte Trésor coûtant jusqu'à 3 Pièces de plus ; "
+				+ "ajoutez cette carte à votre main.";
 	}
 
 	public void play(Player p) {
-		CardList cardTreasurePlayer = new CardList();
+		
 		CardList cardAvailable = new CardList();
 		CardList cardTreasureAvailable = new CardList();
 		String decision;
-		int i = 0;
 		
-		cardTreasurePlayer = p.getTreasureCards();
 		Card c;
-		cardAvailable = p.getGame().availableSupplyCards();
-		if(cardTreasurePlayer.size()!=0) {
-			decision = p.chooseCard("Choisissez la carte trésor que vous voulez écarter", cardTreasurePlayer, true);
-			if(decision != "") {
-				c = cardTreasurePlayer.getCard(decision);
-				p.getGame().setTrashCard(c);
-				p.removeHand(c.getName());
-				i = c.getCost();
-				
-				for(int j = 0; j<cardAvailable.size();j++) {
-					if(cardAvailable.get(j).getCost() <= i+3) {
-						cardTreasureAvailable.add(cardAvailable.get(j));
-					}
-				}
-				
-				decision = p.chooseCard("Choisissez la carte trésor que vous voulez recevoir",cardTreasureAvailable, true);
-				if(!decision.equals(""))
-					p.setHand(cardTreasureAvailable.getCard(decision));
-			}
+		
+		
+		if(!p.getTreasureCards().isEmpty()) {
+			decision = p.chooseCard("Choisissez la carte trésor que vous voulez écarter", p.getTreasureCards(), false);		
+			c = p.getTreasureCards().getCard(decision);
+			p.removeHand(c.getName());
+
 			
+			cardAvailable.addAll(p.getGame().availableSupplyCards());
+			for(int i = 0; i<cardAvailable.size();i++) {
+				if(cardAvailable.get(i).getTypes().get(0) == CardType.Treasure && cardAvailable.get(i).getCost() <= c.getCost() + 3) {
+					cardTreasureAvailable.add(cardAvailable.get(i));
+				}
+			}	
+			
+			
+			decision = p.chooseCard("Choisissez la carte trésor que vous voulez recevoir",cardTreasureAvailable, false);
+			p.setHand(p.getGame().removeFromSupply(decision));	
 		}
 		
 	}
