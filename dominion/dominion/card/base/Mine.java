@@ -33,6 +33,7 @@ public class Mine extends ActionCard {
 			decision = p.chooseCard("Choisissez la carte trésor que vous voulez écarter", p.getTreasureCards(), false);		
 			c = p.getTreasureCards().getCard(decision);
 			p.removeHand(c.getName());
+			p.getGame().setTrashCard(c);
 
 			
 			cardAvailable.addAll(p.getGame().availableSupplyCards());

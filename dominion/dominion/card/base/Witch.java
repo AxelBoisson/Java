@@ -25,11 +25,14 @@ public class Witch extends AttackCard {
 			p.setHand(p.drawCard());
 		
 		Card c = p.getGame().getFromSupply("Curse");
+		
+		
+		
 		for(int i=0;i<p.otherPlayers().size();i++) {
-			if(c!=null) {
-				p.otherPlayers().get(i).setDiscard(c);
-				p.otherPlayers().get(i).getGame().removeFromSupply("Curse");
-			}
+			
+			p.otherPlayers().get(i).setDiscard(c);
+			p.otherPlayers().get(i).getGame().removeFromSupply("Curse");
+			
 		}
 	}
 	

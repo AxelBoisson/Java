@@ -55,6 +55,7 @@ public class Game {
 		
 		this.players = new Player[playerNames.length];
 		this.supplyStacks = new ArrayList<CardList>();
+		this.trashedCards = new CardList();
 		
 		if(playerNames.length == 1){
 			Player p1 = new Player(playerNames[0], this);
@@ -144,7 +145,7 @@ public class Game {
 		for(int i=0;i<(playerNames.length-1)*10;i++) {
 			kingdomStacks.get(kingdomStacks.size()-1).add(curse);
 		}
-		
+	
 		this.supplyStacks.addAll(kingdomStacks);
 	}
 	

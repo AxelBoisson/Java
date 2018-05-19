@@ -29,6 +29,7 @@ public class Moneylender extends ActionCard {
 		while( i < p.getTreasureCards().size() && stop == false) {
 			if(treasureCard.get(i).getName().equals("Copper")) {		
 				p.removeHand(treasureCard.get(i).getName());
+				p.getGame().setTrashCard(treasureCard.get(i));
 				p.incrementMoney(3);
 				stop = true;
 			}

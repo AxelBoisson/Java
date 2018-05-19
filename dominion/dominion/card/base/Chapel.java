@@ -33,14 +33,16 @@ public class Chapel extends ActionCard {
 		
 		while(nbRemove < 4 && decision != "") {
 			decision = p.chooseCard("Choisissez la carte que vous voulez écarter, pour arreter appuyez sur entrée directement", cardInHand, true);
-			if(decision != "") {	
+			if(!decision.equalsIgnoreCase("")) {	
 				cardToRemove.add(cardInHand.getCard(decision));
 				nbRemove++;
 			}
 		}
 		if(cardToRemove.size() != 0){
-			for(int i = 0; i<cardToRemove.size();i++)
-				p.removeHand(cardToRemove.get(i).getName());			
+			for(int i = 0; i<cardToRemove.size();i++) {
+				p.getGame().setTrashCard(cardToRemove.get(i));
+				p.removeHand(cardToRemove.get(i).getName());
+			}
 		}
 	}
 }

@@ -26,16 +26,6 @@ public class Moat extends ReactionCard {
 	}
 
 	public boolean reaction(Player p){
-		play(p);
-		return this.reaction;
-	}
-	
-	
-	public void play(Player p) {
-		for(int i = 0; i<2;i++){
-			p.setHand(p.drawCard());
-		}
-		
 		List<Player> adversary = new ArrayList<Player>();
 		List<String> choice = new ArrayList<String>();
 		choice.add("y");
@@ -48,19 +38,17 @@ public class Moat extends ReactionCard {
 			if (playCard.getTypes().get(0) == CardType.Attack){
 				decision = p.choose("Voulez-vous dévoiler votre carte Réaction ?", choice, false);
 				if(decision.equalsIgnoreCase("y")){
-					this.reaction = true;
-				}
-				else
-					this.reaction = false;
-			}
-			
-			
+					return true;
+				}	
+			}		
 		}
-		
-		
-		
-		
+		return false;		
 	}
 	
 	
+	public void play(Player p) {
+		for(int i = 0; i<2;i++){
+			p.setHand(p.drawCard());
+		}	
+	}
 }

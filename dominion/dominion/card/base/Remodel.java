@@ -30,6 +30,7 @@ public class Remodel extends ActionCard {
 			decision = p.chooseCard("Choisissez la carte que vous voulez écarter", p.cardsInHand(), false);
 			c = p.cardsInHand().getCard(decision);
 			p.removeHand(c.getName());
+			p.getGame().setTrashCard(c);
 			
 			
 			totalCardAvailable.addAll(p.getGame().availableSupplyCards());

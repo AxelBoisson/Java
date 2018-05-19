@@ -82,6 +82,7 @@ public abstract class Card {
 		return 0;
 	}
 	
+	
 }
 
 

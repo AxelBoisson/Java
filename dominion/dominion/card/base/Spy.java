@@ -17,9 +17,10 @@ public class Spy extends AttackCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +1 Carte.\n" + 
-				"  +1 Action.\n" + 
-				"  Tous les joueurs (vous aussi) dévoilent la première carte de leur deck. Vous décidez ensuite si chaque carte dévoilée est défaussée ou replacée sur son deck.";
+		return super.toString() + " +1 Carte.\n" 
+				+ " +1 Action.\n" 
+				+ " Tous les joueurs (vous aussi) dévoilent la première carte de leur deck. "
+				+ " Vous décidez ensuite si chaque carte dévoilée est défaussée ou replacée sur son deck.";
 	}
 	
 	public void play(Player p) {
@@ -35,16 +36,27 @@ public class Spy extends AttackCard {
 		
 		for(int i = 0; i<p.getGame().numberOfPlayers(); i++) {	
 			playerGame.add(p.getGame().getPlayer(i));
-			firstCardPlayer = playerGame.get(i).getDraw().get(0);
-			
-			String decision = "noChoice";
-			p.choose("Voulez vous défaussez cette carte ou la replacer sur son deck ?", choice, false);
-			if(decision.equalsIgnoreCase("y")) {
-				playerGame.get(i).setDiscard(firstCardPlayer);
-				playerGame.get(i).removeDraw(firstCardPlayer.getName());
+			if(!playerGame.get(i).getDraw().isEmpty()){
+				firstCardPlayer = playerGame.get(i).getDraw().get(0);
 			}
-			else 
-				playerGame.get(i).setHand(firstCardPlayer);
+			else{
+				firstCardPlayer = playerGame.get(i).getDiscard().get(0);
+				playerGame.get(i).removeDiscard(firstCardPlayer.getName());
+			}
+				
+			String decision = "noChoice";
+			decision = p.choose("Voulez vous défaussez cette carte ou la replacer sur son deck ?", choice, false);
+			if(decision.equalsIgnoreCase("y")) {
+				playerGame.get(i).removeDraw(firstCardPlayer.getName());
+				playerGame.get(i).setDiscard(firstCardPlayer);	
+			}
+			
+			if(decision.equalsIgnoreCase("n") && !playerGame.get(i).equals(playerGame.get(0))){
+				playerGame.get(i).setDraw(firstCardPlayer);
+			}
+			
+			
+				
 		}
 					
 	}

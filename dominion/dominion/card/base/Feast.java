@@ -24,6 +24,7 @@ public class Feast extends ActionCard {
 		CardList cardInHand = new CardList();
 		cardInHand = p.cardsInHand();
 		String decision ="noChoice";
+		boolean stop = false;
 		CardList totalCardAvailable = new CardList();
 		totalCardAvailable = p.getGame().availableSupplyCards();
 		CardList cardAvailable = new CardList(); 
@@ -32,16 +33,18 @@ public class Feast extends ActionCard {
 				cardAvailable.add(totalCardAvailable.get(i));
 		}
 		
-		decision = p.chooseCard("Choisissez la carte que vous voulez écarter, appuyez directement sur entrée pour passer", cardInHand, true);
-		if(!decision.equals("")) {
-			p.getGame().setTrashCard(this);
+		while(stop == false) {
+			decision = p.chooseCard("Choisissez la carte que vous voulez écarter, appuyez directement sur entrée pour passer", cardInHand, true);
+			if(!decision.equals("")) {
+				p.getGame().setTrashCard(cardInHand.getCard(decision));
+			}
+			
+			decision = p.chooseCard("Choisisssez la carte que vous voulez recevoir, appuyez directement sur entrée pour passer", cardAvailable, true);
+			if(!decision.equals("")) {
+				p.gain(decision);
+			}
+			stop = true;
 		}
-		
-		decision = p.chooseCard("Choisisssez la carte que vous voulez recevoir, appuyez directement sur entrée pour passer", cardAvailable, true);
-		if(!decision.equals("")) {
-			p.gain(decision);
-		}
-		
 		
 	}
 }

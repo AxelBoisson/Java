@@ -23,13 +23,13 @@ public class ThroneRoom extends ActionCard {
 	public void play(Player p) {
 		
 		CardList actionInHand = new CardList();
-		Card c1,c2;
+		Card c;
 		actionInHand = p.getActionCards();
 		
 		String decision = "";
 		
 		if(!actionInHand.isEmpty()) {
-			if(actionInHand.size()>2) {
+			if(actionInHand.size()>=2) {
 				decision = p.chooseCard("Choisissez une carte Action de votre main", actionInHand, false);
 			}
 			else {
@@ -37,10 +37,11 @@ public class ThroneRoom extends ActionCard {
 				decision = p.chooseCard("Choisissez une carte Action de votre main", actionInHand, false);
 			}
 			
-			c1 = actionInHand.getCard(decision);
-			c2 = c1;
-			p.playCard(c1);
-			p.playCard(c2);
+			c = actionInHand.getCard(decision);
+			
+			p.playCard(c);
+			p.removeInPlay(c.getName());
+			p.playCard(c);
 		}
 		
 		
