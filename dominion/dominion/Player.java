@@ -314,6 +314,7 @@ public class Player {
 		}
 		return treasureCards;
 		
+		
 	}
 	
 	/**
@@ -330,6 +331,8 @@ public class Player {
 			}
 		}
 		return actionCards;
+		
+		
 	}
 	
 	/**
@@ -346,6 +349,7 @@ public class Player {
 			}
 		}
 		return victoryCards;
+		
 	}
 	
 	/**
@@ -358,8 +362,7 @@ public class Player {
 	 * La méthode retire la carte de la main du joueur, la place dans la liste
 	 * {@code inPlay} et exécute la méthode {@code play(Player p)} de la carte.
 	 */
-	public void playCard(Card c) {
-		
+	public void playCard(Card c) {	
 		this.inPlay.add(c);
 		this.hand.remove(c);
 		c.play(this);
@@ -422,6 +425,7 @@ public class Player {
 		this.discard.add(gain);
 		gain = this.game.removeFromSupply(cardName);
 		return gain;
+
 	}
 	
 	/**
@@ -444,12 +448,13 @@ public class Player {
 		int cost;
 		cost = buy.getCost();
 		if(this.money >= cost && this.buys >= 1) {
-			this.money = this.money - cost;
+			incrementMoney(-cost);
 			incrementBuys(-1);
-			this.discard.add(buy);
+			this.discard.add(this.game.removeFromSupply(cardName));
 			return buy;
 		}
 		return null;
+	
 		
 	}
 	
@@ -586,17 +591,17 @@ public class Player {
 	 * - Le joueur pioche 5 cartes en main
 	 */
 	public void endTurn() {
-		this.actions = 0;
+		this.actions = 1;
 		this.money = 0;
-		this.buys = 0;
+		this.buys = 1;
 			
-		this.hand.addAll(discard);
+		this.discard.addAll(this.hand);
+		this.discard.addAll(this.inPlay);
 		this.hand.clear();
-		this.inPlay.addAll(discard);
 		this.inPlay.clear();
 		
 		for(int i=0; i<5; i++) 
-			drawCard();
+			setHand(drawCard());
 	}
 	
 	/**
@@ -626,38 +631,40 @@ public class Player {
 	 * 5. (Fin) La méthode {@code endTurn()} est appelée pour terminer le tour 
 	 * du joueur
 	 */
-	public void playTurn() {
-		
+	public void playTurn() {	 
+	
 		CardList actionsCard = new CardList();
 		CardList treasuresCard = new CardList();
-		
+		boolean stop = false;
 		
 		startTurn();	
 	
-		String decision = "noChoice";
+		String decision;
 		actionsCard = getActionCards();
-		while(this.actions != 0 && actionsCard.size()>0 && decision != "") {
+		while(this.actions != 0 && stop == false && actionsCard.size()>0 ) {
 			decision = chooseCard("Choisissez une carte action de votre main",actionsCard, true);
-			if(decision != "") {
+			if(!decision.equalsIgnoreCase("")) {
 				incrementActions(-1);
-				playCard(decision);
+				playCard(decision);			
 			}
+			else
+				stop = true;
 		}
 		
 		treasuresCard = getTreasureCards();
 		for(int i = 0; i<treasuresCard.size();i++)
 			playCard(treasuresCard.get(i));
 		
-		decision = "noChoice";
-		while(this.buys >= 1 && decision != "") {
+		
+		stop = false;
+		while(this.buys != 0 && this.money >0 && stop == false && !this.game.availableSupplyCards().isEmpty()) {
 			decision = chooseCard("Choisissez la carte dans la réserve que vous souhaitez acheter", this.game.availableSupplyCards(),true);
-			if(decision != "") {
-				buyCard(decision);
-				incrementBuys(-1);	
+			if(!decision.equalsIgnoreCase("")) {
+				buyCard(decision);	
 			}	
+			else
+				stop = true;
 		}
-		
-		endTurn();
-		
+		endTurn();	
 	}
 }

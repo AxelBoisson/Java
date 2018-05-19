@@ -78,9 +78,11 @@ public abstract class Card {
 	 * (la méthode devra donc être redéfinie pour les cartes ayant une valeur 
 	 * non nulle).
 	 */
-	public int victoryValue(Player p) {
+	public int victoryValue(Player p) {	
 		return 0;
 	}
+	
+	
 	
 	
 }

@@ -56,6 +56,8 @@ public class Game {
 		this.players = new Player[playerNames.length];
 		this.supplyStacks = new ArrayList<CardList>();
 		this.trashedCards = new CardList();
+		this.currentPlayerIndex = 0;
+		scanner=new Scanner(System.in);
 		
 		if(playerNames.length == 1){
 			Player p1 = new Player(playerNames[0], this);
@@ -323,7 +325,7 @@ public class Game {
 	 * final et les cartes possédées par chacun des joueurs.
 	 */
 	public void run() {
-		while (! this.isFinished()) {
+		while (!this.isFinished()) {
 			// joue le tour du joueur courant
 			this.players[this.currentPlayerIndex].playTurn();
 			// passe au joueur suivant

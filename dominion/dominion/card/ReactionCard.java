@@ -11,7 +11,6 @@ public abstract class ReactionCard extends ActionCard {
 	
 	CardType type;
 		
-	
 	public ReactionCard(String name, int cost){
 		super(name,cost);
 		type = CardType.Reaction;
@@ -26,5 +25,6 @@ public abstract class ReactionCard extends ActionCard {
 		liste.add(type);
 		return liste;
 	}
+
 	
 }
