@@ -16,32 +16,32 @@ public class ThroneRoom extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " Choisissez 1 carte Action de votre main.\n" + 
+		return super.toString() + " Choisissez 1 carte Action de votre main." + 
 				" Jouez-la deux fois.";
 	}
 	
 	public void play(Player p) {
+		// Initialisation de la carte à jouer et de la décision	
+		Card cardPlayed;
+		String decision;
 		
-		CardList actionInHand = new CardList();
-		Card c;
-		actionInHand = p.getActionCards();
-		
-		String decision = "";
-		
-		if(!actionInHand.isEmpty()) {
-			if(actionInHand.size()>=2) {
-				decision = p.chooseCard("Choisissez une carte Action de votre main", actionInHand, false);
+		// Si le joueur a une carte action dans sa main
+		if(!p.getActionCards().isEmpty()) {
+			// Si il a au moins 2 cartes actions dans sa main, il aura la possibilité de rejouer la carte Throne Room
+			if(p.getActionCards().size()>=2) {
+				decision = p.chooseCard("Choisissez une carte Action de votre main", p.getActionCards(), false);
 			}
+			// Sinon on retire la carte Throne Room de sa main pour éviter qu'il puisse la rejouer 2 fois (il doit avoir au moins 2 cartes actions dans sa main pour la rejouer)
 			else {
-				actionInHand.remove("Throne Room");
-				decision = p.chooseCard("Choisissez une carte Action de votre main", actionInHand, false);
+				p.getActionCards().remove("Throne Room");
+				decision = p.chooseCard("Choisissez une carte Action de votre main", p.getActionCards(), false);
 			}
 			
-			c = actionInHand.getCard(decision);
+			cardPlayed = p.getActionCards().getCard(decision);
 			
-			p.playCard(c);
-			p.removeInPlay(c.getName());
-			p.playCard(c);
+			p.playCard(cardPlayed); // On joue la carte choisit
+			p.removeInPlay(cardPlayed.getName()); // On la retire du jeu
+			p.playCard(cardPlayed); // Et on la rejoue encore une fois
 		}
 		
 		

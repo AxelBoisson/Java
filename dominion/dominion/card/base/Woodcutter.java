@@ -21,7 +21,9 @@ public class Woodcutter extends ActionCard {
 	}
 	
 	public void play(Player p) {
+		// Incrémente le nombre d'achat de 1
 		p.incrementBuys(1);
+		// Incrémente le nombre de pièces de 2
 		p.incrementMoney(2);
 	}
 }

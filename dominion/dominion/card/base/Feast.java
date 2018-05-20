@@ -16,35 +16,30 @@ public class Feast extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "Écartez cette carte.\n" + 
-				" * Recevez une carte coûtant jusqu'à 5 Pièces.";
+		return super.toString() + " Écartez cette carte." + 
+				" Recevez une carte coûtant jusqu'à 5 Pièces.";
 	}
 	
 	public void play(Player p) {
-		CardList cardInHand = new CardList();
-		cardInHand = p.cardsInHand();
-		String decision ="noChoice";
-		boolean stop = false;
-		CardList totalCardAvailable = new CardList();
-		totalCardAvailable = p.getGame().availableSupplyCards();
+		// Initialisation de la décision et des cartes valables
+		String decision;
 		CardList cardAvailable = new CardList(); 
-		for(int i = 0; i< totalCardAvailable.size();i++) {
-			if(totalCardAvailable.get(i).getCost()<=5)
-				cardAvailable.add(totalCardAvailable.get(i));
+		
+		// Pour toutes les cartes disponibles de la réserve
+		for(int i = 0; i< p.getGame().availableSupplyCards().size();i++) {
+			// Si la carte de la réserve a un prix inférieur ou égal à 5
+			if(p.getGame().availableSupplyCards().get(i).getCost()<=5)
+				cardAvailable.add(p.getGame().availableSupplyCards().get(i)); // On stocke cette carte dans la liste des cartes valables
 		}
 		
-		while(stop == false) {
-			decision = p.chooseCard("Choisissez la carte que vous voulez écarter, appuyez directement sur entrée pour passer", cardInHand, true);
-			if(!decision.equals("")) {
-				p.getGame().setTrashCard(cardInHand.getCard(decision));
-			}
+		// Si la liste des cartes valables n'est pas vide
+		if(!cardAvailable.isEmpty()) {
+			p.getGame().addTrashCard(p.getInPlay().getCard("Feast")); // On écarte la carte feast 
+			p.removeInPlay("Feast"); // On retire la carte feast du jeu
 			
-			decision = p.chooseCard("Choisisssez la carte que vous voulez recevoir, appuyez directement sur entrée pour passer", cardAvailable, true);
-			if(!decision.equals("")) {
-				p.gain(decision);
-			}
-			stop = true;
+			decision = p.chooseCard("Choisisssez la carte que vous voulez recevoir, appuyez directement sur entrée pour passer", cardAvailable, false);	
+			p.gain(decision); // Le joueur choisit une des cartes valables
+					
 		}
-		
 	}
 }

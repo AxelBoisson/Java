@@ -116,19 +116,19 @@ public class Player {
 		return this.game;
 	}
 	
-	public void setHand(Card c) {
+	public void addHand(Card c) {
 		this.hand.add(c);
 	}
 	
-	public void setDiscard(Card c) {
+	public void addDiscard(Card c) {
 		this.discard.add(c);
 	}
 	
-	public void setDraw(Card c){
+	public void addDraw(Card c){
 		this.draw.add(c);
 	}
 	
-	public void setInPlay(Card c){
+	public void addInPlay(Card c){
 		this.inPlay.add(c);
 	}
 	
@@ -601,7 +601,7 @@ public class Player {
 		this.inPlay.clear();
 		
 		for(int i=0; i<5; i++) 
-			setHand(drawCard());
+			addHand(drawCard());
 	}
 	
 	/**

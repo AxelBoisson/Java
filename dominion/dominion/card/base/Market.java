@@ -25,10 +25,13 @@ public class Market extends ActionCard {
 	}
 	
 	public void play(Player p) {
-		p.setHand(p.drawCard());
-		
+		// Le joueur pioche une fois
+		p.addHand(p.drawCard());
+		// Incrémente le nombre d'action de 1
 		p.incrementActions(1);
+		// Incrémente le nombre d'achat de 1
 		p.incrementBuys(1);
+		// Incrémente le nombre de pièce de 1
 		p.incrementMoney(1);
 	}
 }

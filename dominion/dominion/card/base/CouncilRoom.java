@@ -18,22 +18,23 @@ public class CouncilRoom extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "+4 Cartes.\n" + 
+		return super.toString() + " +4 Cartes." + 
 				" +1 Achat.\n" + 
 				" Tous vos adversaires piochent 1 carte.";
 	}
 	
 	public void play(Player p) {
+		// Incrémente le nombre d'achat de 1
 		p.incrementBuys(1);
 		
+		// Le joueur pioche 4 fois
 		for(int i = 0; i<4; i++)
-			p.setHand(p.drawCard());
+			p.addHand(p.drawCard());
 		
-		List<Player> other = new ArrayList<Player>();
-		other = p.getGame().otherPlayers(p);
 		
-		for(int i = 0; i<other.size();i++)
-			other.get(i).setHand(other.get(i).drawCard());
+		// Tous les adversaires du joueur pioche une carte
+		for(int i = 0; i<p.getGame().otherPlayers(p).size();i++)
+			p.getGame().otherPlayers(p).get(i).addHand(p.getGame().otherPlayers(p).get(i).drawCard());
 		
 	}
 	

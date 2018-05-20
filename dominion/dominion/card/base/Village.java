@@ -21,8 +21,10 @@ public class Village extends ActionCard {
 	}
 	
 	public void play(Player p) {
+		// Incrémente le nombre d'actions de 2
 		p.incrementActions(2);
-		p.setHand(p.drawCard());
+		// Le joueur pioche une fois
+		p.addHand(p.drawCard());
 		
 	}
 	

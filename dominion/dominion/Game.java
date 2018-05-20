@@ -162,7 +162,7 @@ public class Game {
 		return this.players[index];
 	}
 	
-	public void setTrashCard(Card c) {
+	public void addTrashCard(Card c) {
 		this.trashedCards.add(c);
 	}
 	

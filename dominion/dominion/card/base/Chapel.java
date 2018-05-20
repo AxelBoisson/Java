@@ -40,7 +40,7 @@ public class Chapel extends ActionCard {
 		}
 		if(cardToRemove.size() != 0){
 			for(int i = 0; i<cardToRemove.size();i++) {
-				p.getGame().setTrashCard(cardToRemove.get(i));
+				p.getGame().addTrashCard(cardToRemove.get(i));
 				p.removeHand(cardToRemove.get(i).getName());
 			}
 		}

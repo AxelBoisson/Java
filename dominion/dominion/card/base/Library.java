@@ -17,31 +17,35 @@ public class Library extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " Piochez jusqu'à ce que vous ayez 7 cartes en main."
-				+ " Chaque carte Action piochée peut être mise de côté."
+		return super.toString() + " Piochez jusqu'à ce que vous ayez 7 cartes en main.\n"
+				+ " Chaque carte Action piochée peut être mise de côté.\n"
 				+ " Défaussez les cartes mises de côté lorsque vous avez terminé de piocher.";
 	}
 	
 	
 	public void play(Player p) {
+		// Initialisation des choix, de la carte pioché et de la décision
 		List<String> choice = new ArrayList<String>();
 		choice.add("y");
 		choice.add("n");
-		Card c;
+		Card cardDraw;
 		String decision;
 		
+		// Tant que le joueur a moins de 7 cartes en mains
 		while(p.cardsInHand().size()<7) {
-			c = p.drawCard();
-			if(c.getTypes().get(0) == CardType.Action) {
-				decision = p.choose("Voulez-vous écarter cette carte ?", choice, false);
-				if(decision.equalsIgnoreCase("y")) {
-					p.setDiscard(c);
+			cardDraw = p.drawCard(); // On récupère la carte pioché
+			if(cardDraw.getTypes().get(0) == CardType.Action) { // Si la carte pioché est de type action
+				decision = p.choose("Voulez-vous mettre de côté cette carte ?", choice, false);
+				if(decision.equalsIgnoreCase("y")) { // Si le joueur veut la mettre de côté
+					p.addDiscard(cardDraw); // On défausse cette carte
 				}
-				else
-					p.setHand(c);
+				// Sinon on l'ajoute dans sa main
+				else 
+					p.addHand(cardDraw);
 			}
+			// Si la carte n'est pas de type action on l'ajoute à la main automatiquement
 			else
-				p.setHand(c);			
+				p.addHand(cardDraw);			
 			
 		}
 		

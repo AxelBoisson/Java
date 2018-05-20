@@ -17,17 +17,18 @@ public class Gardens extends VictoryCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "Vaut 1VP pour chaque 10 cartes dans votre deck (arrondi à l'unité inférieure).";
+		return super.toString() + " Vaut 1VP pour chaque 10 cartes dans votre deck (arrondi à l'unité inférieure).";
 	}
 	
 	public int victoryValue(Player p) {
-		play(p);
+		// Joue la carte pour récupérer le total de VP
+		play(p); 
+		// Retourne le total de VP
 		return this.nbVictory;
 	}
 	
 	public void play(Player p) {
-		CardList totalCardPlayer = new CardList();
-		totalCardPlayer = p.totalCards();
-		this.nbVictory = totalCardPlayer.size() / 10;
+		// Récupère le total des cartes du joueurs puis divise par 10
+		this.nbVictory = p.totalCards().size() / 10;
 	}
 }

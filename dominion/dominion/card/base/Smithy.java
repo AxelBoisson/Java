@@ -15,12 +15,13 @@ public class Smithy extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "+3 Cartes.";
+		return super.toString() + " +3 Cartes.";
 	}
 	
 	public void play(Player p) {
+		// Le joueur pioche 3 fois
 		for(int i = 0; i<3;i++) {
-			p.setHand(p.drawCard());		
+			p.addHand(p.drawCard());		
 		}
 	}
 	

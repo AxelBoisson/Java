@@ -15,23 +15,23 @@ public class Workshop extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "Recevez une carte coûtant jusqu'à 4 Pièces.";
+		return super.toString() + " Recevez une carte coûtant jusqu'à 4 Pièces.";
 	}
 	
 	public void play(Player p) {
-		String reponse;
-		CardList supplyCard = new CardList();
-		supplyCard = p.getGame().availableSupplyCards();
+		// Initialisation de décision et des cartes valables
+		String decision;
 		CardList cardAvailable = new CardList();
 		
-		for(int i = 0; i<supplyCard.size();i++) {
-			if(supplyCard.get(i).getCost()<=4) {
-				cardAvailable.add(supplyCard.get(i));
+		// Pour toutes les cartes disponible dans la réserve
+		for(int i = 0; i<p.getGame().availableSupplyCards().size();i++) { 
+			if(p.getGame().availableSupplyCards().get(i).getCost()<=4) { // Si la carte de la réserve à un prix inférieur ou égale a 4
+				cardAvailable.add(p.getGame().availableSupplyCards().get(i)); // On stocke cette carte dans la cardlist des cartes valables
 			}
 		}	
 		
-		reponse = p.chooseCard("Choisissez la carte parmis celle disponible", cardAvailable, false);
-		p.gain(reponse);
+		decision = p.chooseCard("Choisissez la carte parmis celle disponible", cardAvailable, false);
+		p.gain(p.getGame().removeFromSupply(decision)); // Le joueur gagne la carte choisit et elle est retiré de la réserve
 				
 		
 	}

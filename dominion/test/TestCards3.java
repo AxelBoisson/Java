@@ -18,7 +18,7 @@ public class TestCards3 extends Test {
 		g.setInput("y", "n");
 		p0.playCard("Witch");
 		t.check(p1.discard.size() == 0);
-		//t.check(hasCards(p2.discard, "Curse"));
+		t.check(hasCards(p2.discard, "Curse"));
 	}
 
 	private static void testSpy(Test t) {
