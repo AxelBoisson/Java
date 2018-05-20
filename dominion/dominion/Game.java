@@ -1,6 +1,7 @@
 package dominion;
 import java.util.*;
 import dominion.card.*;
+import dominion.card.base.Village;
 import dominion.card.common.*;
 
 /**
@@ -57,39 +58,10 @@ public class Game {
 		this.supplyStacks = new ArrayList<CardList>();
 		this.trashedCards = new CardList();
 		this.currentPlayerIndex = 0;
-		scanner=new Scanner(System.in);
+		scanner = new Scanner(System.in);
 		
-		if(playerNames.length == 1){
-			Player p1 = new Player(playerNames[0], this);
-			this.players[0] = p1;
-		}
-		
-		else if(playerNames.length == 2) {
-			Player p1 = new Player(playerNames[0], this);
-			Player p2 = new Player(playerNames[1], this);
-			this.players[0] = p1;
-			this.players[1] = p2;
-			
-		}
-		
-		else if(playerNames.length == 3) {
-			Player p1 = new Player(playerNames[0], this);
-			Player p2 = new Player(playerNames[1], this);
-			Player p3 = new Player(playerNames[2], this);
-			this.players[0] = p1;
-			this.players[1] = p2;
-			this.players[2] = p3;
-		}
-		
-		else if(playerNames.length == 4) {
-			Player p1 = new Player(playerNames[0], this);
-			Player p2 = new Player(playerNames[1], this);
-			Player p3 = new Player(playerNames[2], this);
-			Player p4 = new Player(playerNames[3], this);
-			this.players[0] = p1;
-			this.players[1] = p2;
-			this.players[2] = p3;
-			this.players[3] = p4;
+		for(int i=0;i<playerNames.length;i++){
+			this.players[i] = new Player(playerNames[i],this);
 		}
 		
 		CardList Copper = new CardList();
@@ -100,26 +72,21 @@ public class Game {
 		CardList Province = new CardList();
 		CardList Curse = new CardList();
 		
-		Copper copper = new Copper();
-		Silver silver = new Silver();
-		Gold gold = new Gold();
-		Estate estate = new Estate();
-		Duchy duchy = new Duchy();
-		Province province = new Province();
-		Curse curse = new Curse();
-		
+
 		kingdomStacks.add(Copper);
 		kingdomStacks.add(Silver);
 		kingdomStacks.add(Gold);
 		
 		for(int i = 0;i < 60;i++) 
-			kingdomStacks.get(kingdomStacks.size()-3).add(copper);
+			kingdomStacks.get(kingdomStacks.size()-3).add(new Copper());
+		
 		
 		for(int i = 0;i < 40;i++) 
-			kingdomStacks.get(kingdomStacks.size()-2).add(silver);
+			kingdomStacks.get(kingdomStacks.size()-2).add(new Silver());
+		
 		
 		for(int i = 0;i < 30;i++) 
-			kingdomStacks.get(kingdomStacks.size()-1).add(gold);
+			kingdomStacks.get(kingdomStacks.size()-1).add(new Gold());
 		
 		kingdomStacks.add(Estate);
 		kingdomStacks.add(Duchy);
@@ -127,28 +94,31 @@ public class Game {
 		
 		if(playerNames.length == 2) {
 			for(int i = 0;i < 8;i++) {
-				kingdomStacks.get(kingdomStacks.size()-3).add(estate);
-				kingdomStacks.get(kingdomStacks.size()-2).add(duchy);
-				kingdomStacks.get(kingdomStacks.size()-1).add(province);
+				kingdomStacks.get(kingdomStacks.size()-3).add(new Estate());
+				kingdomStacks.get(kingdomStacks.size()-2).add(new Duchy());
+				kingdomStacks.get(kingdomStacks.size()-1).add(new Province());
 			}
 			
 		}
 		
 		if(playerNames.length > 2) {
 			for(int i = 0;i < 12;i++) {
-				kingdomStacks.get(kingdomStacks.size()-3).add(estate);
-				kingdomStacks.get(kingdomStacks.size()-2).add(duchy);
-				kingdomStacks.get(kingdomStacks.size()-1).add(province);
+				kingdomStacks.get(kingdomStacks.size()-3).add(new Estate());
+				kingdomStacks.get(kingdomStacks.size()-2).add(new Duchy());
+				kingdomStacks.get(kingdomStacks.size()-1).add(new Province());
 			}
 			
 		}
 		
 		kingdomStacks.add(Curse);
 		for(int i=0;i<(playerNames.length-1)*10;i++) {
-			kingdomStacks.get(kingdomStacks.size()-1).add(curse);
+			kingdomStacks.get(kingdomStacks.size()-1).add(new Curse());
 		}
 	
 		this.supplyStacks.addAll(kingdomStacks);
+		
+		
+		
 	}
 	
 	/**
@@ -282,19 +252,19 @@ public class Game {
 	public Card removeFromSupply(String cardName) {
 		Card remove;
 		for(int i = 0; i<this.supplyStacks.size();i++) {
-			for(int j = 0; j<this.supplyStacks.get(i).size();j++){
-				if(this.supplyStacks.get(i).get(j).getName().equals(cardName)) {
-					remove = this.supplyStacks.get(i).get(j);
-					this.supplyStacks.get(i).remove(this.supplyStacks.get(i).get(j));
-					if(this.supplyStacks.get(i).size() == 0){
-						this.supplyStacks.remove(i);
-					}
+			if(!this.supplyStacks.get(i).isEmpty()) {
+				if(this.supplyStacks.get(i).getCard(cardName) != null){
+					remove = this.supplyStacks.get(i).remove(cardName);
 					return remove;
 				}
-			}
+			}			
 		}
 		return null;
 	}
+		
+		
+
+		
 	
 	/**
 	 * Teste si la partie est terminée
@@ -310,13 +280,14 @@ public class Game {
 	public boolean isFinished() {
 		int nbSupplyEmpty = 0;
 		for(int i = 0; i<this.supplyStacks.size();i++) {
-			if(this.supplyStacks.get(i).isEmpty())
+			if(this.supplyStacks.get(i) != null && this.supplyStacks.get(i).isEmpty())
 				nbSupplyEmpty++;
+			
 			if(nbSupplyEmpty == 3)
 				return true;
 		}
 		for(int i = 0; i<this.supplyStacks.size(); i++) {						
-			if(!this.supplyStacks.get(i).isEmpty() && this.supplyStacks.get(i).getCard("Province") != null) 
+			if(this.supplyStacks.get(i) != null && !this.supplyStacks.get(i).isEmpty() && this.supplyStacks.get(i).getCard("Province") != null) 
 				return false;			
 		}
 		return true;	
