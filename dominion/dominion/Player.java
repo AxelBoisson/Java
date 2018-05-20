@@ -380,17 +380,15 @@ public class Player {
 	 * fait rien.
 	 */
 	public void playCard(String cardName) {
-		CardList inHand = new CardList();
-		inHand = cardsInHand();
-		int i = 0;
-		boolean cardFind = false;
-		while(i < cardsInHand().size() && cardFind == false) {
-			if(inHand.get(i).getName() == cardName) {
-				playCard(inHand.get(i));
-				cardFind = true;
-			}
-			i++;
+		CardList Hand = new CardList();
+		Hand = cardsInHand();
+		if(Hand.getCard(cardName) != null) {
+			playCard(Hand.getCard(cardName));
 		}
+		/*
+		if(hand.getCard(cardName)!=null){
+			playCard(hand.getCard(cardName));
+		}*/
 	}
 	
 	
@@ -632,7 +630,7 @@ public class Player {
 	 * du joueur
 	 */
 	public void playTurn() {	 
-	
+	/*
 		CardList actionsCard = new CardList();
 		CardList treasuresCard = new CardList();
 		boolean stop = false;
@@ -665,6 +663,45 @@ public class Player {
 			else
 				stop = true;
 		}
-		endTurn();	
+		endTurn();	*/
+		
+		//Préparation
+				startTurn();
+				
+				//Action
+				boolean arretForce = false;
+				System.out.println(getActionCards());
+				while(!arretForce && actions!=0 && getActionCards().size()!=0){
+					String reponse = chooseCard("Choose an Action card.", getActionCards(), true);;
+					if(reponse.equals("")){
+						arretForce=true;
+					}else{
+						incrementActions(-1);
+						playCard(reponse);
+					}
+				}
+				
+				
+				//Tresor
+				CardList cartestresor = getTreasureCards();
+				for(int i=0;i<cartestresor.size();i++){
+					playCard(cartestresor.get(i).getName());
+				}
+				
+				//Achat
+				arretForce = false;
+				while(buys>0 && money>0 && !arretForce && !game.availableSupplyCards().isEmpty()){
+					String reponse = chooseCard("Choose a card.", game.availableSupplyCards(), true);
+					if(reponse.equals("")){
+						arretForce=true;
+					}else{
+						buyCard(reponse);
+					}
+				}
+				
+				//Fin
+				System.out.println("FIN TOUR");
+				endTurn();
+		
 	}
 }
