@@ -308,10 +308,15 @@ public class Game {
 	 * c'est que la partie est terminée)
 	 */
 	public boolean isFinished() {
-		if(this.supplyStacks.size() <= 4)
-			return true;
+		int nbSupplyEmpty = 0;
+		for(int i = 0; i<this.supplyStacks.size();i++) {
+			if(this.supplyStacks.get(i).isEmpty())
+				nbSupplyEmpty++;
+			if(nbSupplyEmpty == 3)
+				return true;
+		}
 		for(int i = 0; i<this.supplyStacks.size(); i++) {						
-			if(this.supplyStacks.get(i).get(0).getName().equals("Province"))
+			if(!this.supplyStacks.get(i).isEmpty() && this.supplyStacks.get(i).getCard("Province") != null) 
 				return false;			
 		}
 		return true;	

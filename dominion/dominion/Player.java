@@ -657,7 +657,7 @@ public class Player {
 		
 		
 		stop = false;
-		while(this.buys != 0 && this.money >0 && stop == false && !this.game.availableSupplyCards().isEmpty()) {
+		while(this.buys > 0 && this.money >0 && stop == false && !this.game.availableSupplyCards().isEmpty()) {
 			decision = chooseCard("Choisissez la carte dans la réserve que vous souhaitez acheter", this.game.availableSupplyCards(),true);
 			if(!decision.equalsIgnoreCase("")) {
 				buyCard(decision);	
