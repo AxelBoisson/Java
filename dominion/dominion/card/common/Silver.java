@@ -15,7 +15,7 @@ public class Silver extends TreasureCard {
 	}
 	
 	public String toString() {
-		return super.toString() +" +2 Pièces.\n";
+		return super.toString() +" Effet: +2 Pièces.\n";
 	}
 	
 	public int treasureValue() {

@@ -29,7 +29,7 @@ public class Mine extends ActionCard {
 		
 		// Si le joueur a au moins une carte trésor dans sa main
 		if(!p.getTreasureCards().isEmpty()) {
-			decision = p.chooseCard("Choisissez la carte trésor que vous voulez écarter", p.getTreasureCards(), false);		
+			decision = p.chooseCard("Choisissez la carte trésor de votre main que vous voulez écarter", p.getTreasureCards(), false);		
 			cardTrash = p.getTreasureCards().getCard(decision); // On récupere la carte que le joueur veut écarter
 			p.removeHand(cardTrash.getName()); // On l'a retire de sa main
 			p.getGame().addTrashCard(cardTrash); // On l'écarte du jeu

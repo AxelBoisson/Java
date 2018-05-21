@@ -14,7 +14,7 @@ public class Province extends VictoryCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +6 Victoires.\n";
+		return super.toString() + " Effet: +6 Victoires.\n";
 	}
 	
 	public int victoryValue(Player p) {

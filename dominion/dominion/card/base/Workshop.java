@@ -30,7 +30,7 @@ public class Workshop extends ActionCard {
 			}
 		}	
 		
-		decision = p.chooseCard("Choisissez la carte parmis celle disponible", cardAvailable, false);
+		decision = p.chooseCard("Choisissez une carte parmis celle disponible", cardAvailable, false);
 		p.gain(p.getGame().removeFromSupply(decision)); // Le joueur gagne la carte choisit et elle est retiré de la réserve
 				
 		

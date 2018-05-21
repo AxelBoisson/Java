@@ -16,7 +16,7 @@ public class Chancellor extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " Effet: +2 Pièces.\n" + 
+		return super.toString() + " Effet: +2 Pièces." + 
 				" Vous pouvez immédiatement défausser votre deck.\n";
 	}
 	

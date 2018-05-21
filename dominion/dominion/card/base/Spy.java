@@ -82,13 +82,7 @@ public class Spy extends AttackCard {
 				if(decision.equalsIgnoreCase("n") && !playerGame.get(i).equals(playerGame.get(0))){
 					playerGame.get(i).addDraw(firstCardPlayer); // On remet la carte dans la pioche
 				}
-			}
-				
-			
-			
-				
-		}
-					
+			}	
+		}			
 	}
-	
 }

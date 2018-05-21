@@ -14,7 +14,7 @@ public class Estate extends VictoryCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +1 Victoire.\n";
+		return super.toString() + " Effet: +1 Victoire.\n";
 	}
 	
 	public int victoryValue(Player p) {

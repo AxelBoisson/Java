@@ -29,7 +29,7 @@ public class Remodel extends ActionCard {
 		
 		// Si la main du joueur n'est pas vide
 		if(!p.cardsInHand().isEmpty()) {
-			decision = p.chooseCard("Choisissez la carte que vous voulez écarter", p.cardsInHand(), false);
+			decision = p.chooseCard("Choisissez la carte de votre main que vous voulez écarter", p.cardsInHand(), false);
 			cardTrash = p.cardsInHand().getCard(decision); // On récupere la carte que l'on veut écarter
 			p.removeHand(cardTrash.getName()); // On la retire de la main
 			p.getGame().addTrashCard(cardTrash); // On l'écarte

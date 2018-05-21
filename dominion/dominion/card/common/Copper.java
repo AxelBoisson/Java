@@ -14,7 +14,7 @@ public class Copper extends TreasureCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +1 Pièce.\n";
+		return super.toString() + " Effet: +1 Pièce.\n";
 	}
 	
 	public int treasureValue() {
