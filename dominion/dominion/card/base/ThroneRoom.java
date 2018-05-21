@@ -16,8 +16,8 @@ public class ThroneRoom extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " Choisissez 1 carte Action de votre main." + 
-				" Jouez-la deux fois.";
+		return super.toString() + " Effet: Choisissez 1 carte Action de votre main." + 
+				" Jouez-la deux fois.\n";
 	}
 	
 	public void play(Player p) {

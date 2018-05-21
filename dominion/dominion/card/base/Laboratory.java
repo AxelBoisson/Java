@@ -18,8 +18,8 @@ public class Laboratory extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +2 Cartes." + 
-				" +1 Action.";
+		return super.toString() + " Effet: +2 Cartes." + 
+				" +1 Action.\n";
 	}
 	
 	public void play(Player p) {

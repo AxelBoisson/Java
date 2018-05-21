@@ -18,9 +18,9 @@ public class Moat extends ReactionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "+2 Cartes.\n" + 
-				" Lorsqu’un adversaire joue une carte Attaque, vous pouvez dévoiler cette carte de votre main.\n"
-				+ " Dans ce cas, l’Attaque n’a pas d’effet sur vous.";
+		return super.toString() + " Effet: +2 Cartes." 
+				+ " Lorsqu’un adversaire joue une carte Attaque, vous pouvez dévoiler cette carte de votre main."
+				+ " Dans ce cas, l’Attaque n’a pas d’effet sur vous.\n";
 	}
 
 	public boolean reaction(Player p){

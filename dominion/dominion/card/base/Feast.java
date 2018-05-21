@@ -16,8 +16,8 @@ public class Feast extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " Écartez cette carte." + 
-				" Recevez une carte coûtant jusqu'à 5 Pièces.";
+		return super.toString() + " Effet: Écartez cette carte." + 
+				" Recevez une carte coûtant jusqu'à 5 Pièces.\n";
 	}
 	
 	public void play(Player p) {

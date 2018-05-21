@@ -14,14 +14,12 @@ public class Copper extends TreasureCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +1 Pièce";
+		return super.toString() + " +1 Pièce.\n";
 	}
 	
 	public int treasureValue() {
 		return 1;
 	}
-	
-	
 
 	public void play(Player p) {
 		p.incrementMoney(1);

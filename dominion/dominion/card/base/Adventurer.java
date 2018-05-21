@@ -19,8 +19,8 @@ public class Adventurer extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " Dévoilez des cartes de votre deck jusqu'à ce que 2 cartes Trésor soient dévoilées.\n"
-				+ " Ajoutez ces cartes Trésor à votre main et défaussez les autres cartes dévoilées.";
+		return super.toString() + " Effet: Dévoilez des cartes de votre deck jusqu'à ce que 2 cartes Trésor soient dévoilées."
+				+ " Ajoutez ces cartes Trésor à votre main et défaussez les autres cartes dévoilées.\n";
 	}
 
 	

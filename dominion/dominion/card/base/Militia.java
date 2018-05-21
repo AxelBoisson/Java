@@ -16,8 +16,8 @@ public class Militia extends AttackCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " 2 Pièces." + 
-				" Tous vos adversaires défaussent leurs cartes de façon à n'avoir que 3 cartes en main.";
+		return super.toString() + " Effet: 2 Pièces." + 
+				" Tous vos adversaires défaussent leurs cartes de façon à n'avoir que 3 cartes en main.\n";
 	}
 	
 	public void play(Player p) {

@@ -18,10 +18,10 @@ public class Market extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "+1 Carte.\n" + 
-				" * +1 Action.\n" + 
-				" * +1 Achat.\n" + 
-				" * +1 Pièce.";
+		return super.toString() + " Effet: +1 Carte." + 
+				" +1 Action." + 
+				" +1 Achat." + 
+				" +1 Pièce.\n";
 	}
 	
 	public void play(Player p) {

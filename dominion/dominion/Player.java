@@ -54,7 +54,7 @@ public class Player {
 	 * Listes des cartes qui ont été jouées pendant le tour courant
 	 */
 	private CardList inPlay;
-	
+
 	/**
 	 * Constructeur
 	 * 
@@ -313,8 +313,6 @@ public class Player {
 			}
 		}
 		return treasureCards;
-		
-		
 	}
 	
 	/**
@@ -331,8 +329,6 @@ public class Player {
 			}
 		}
 		return actionCards;
-		
-		
 	}
 	
 	/**
@@ -349,7 +345,6 @@ public class Player {
 			}
 		}
 		return victoryCards;
-		
 	}
 	
 	/**
@@ -380,15 +375,10 @@ public class Player {
 	 * fait rien.
 	 */
 	public void playCard(String cardName) {
-		CardList Hand = new CardList();
-		Hand = cardsInHand();
-		if(Hand.getCard(cardName) != null) {
-			playCard(Hand.getCard(cardName));
+		
+		if(this.hand.getCard(cardName) != null) {
+			playCard(this.hand.getCard(cardName));
 		}
-		/*
-		if(hand.getCard(cardName)!=null){
-			playCard(hand.getCard(cardName));
-		}*/
 	}
 	
 	
@@ -589,9 +579,9 @@ public class Player {
 	 * - Le joueur pioche 5 cartes en main
 	 */
 	public void endTurn() {
-		this.actions = 1;
+		this.actions = 0;
 		this.money = 0;
-		this.buys = 1;
+		this.buys = 0;
 			
 		this.discard.addAll(this.hand);
 		this.discard.addAll(this.inPlay);
@@ -630,16 +620,17 @@ public class Player {
 	 * du joueur
 	 */
 	public void playTurn() {	 
-	/*
+	
 		CardList actionsCard = new CardList();
 		CardList treasuresCard = new CardList();
 		boolean stop = false;
 		
 		startTurn();	
-	
+		
 		String decision;
 		actionsCard = getActionCards();
 		while(this.actions != 0 && stop == false && actionsCard.size()>0 ) {
+			System.out.println("PHASE ACTION");
 			decision = chooseCard("Choisissez une carte action de votre main",actionsCard, true);
 			if(!decision.equalsIgnoreCase("")) {
 				incrementActions(-1);
@@ -656,6 +647,7 @@ public class Player {
 		
 		stop = false;
 		while(this.buys > 0 && this.money >0 && stop == false && !this.game.availableSupplyCards().isEmpty()) {
+			System.out.println("PHASE ACHAT");
 			decision = chooseCard("Choisissez la carte dans la réserve que vous souhaitez acheter", this.game.availableSupplyCards(),true);
 			if(!decision.equalsIgnoreCase("")) {
 				buyCard(decision);	
@@ -663,45 +655,8 @@ public class Player {
 			else
 				stop = true;
 		}
-		endTurn();	*/
 		
-		//Préparation
-				startTurn();
-				
-				//Action
-				boolean arretForce = false;
-				System.out.println(getActionCards());
-				while(!arretForce && actions!=0 && getActionCards().size()!=0){
-					String reponse = chooseCard("Choose an Action card.", getActionCards(), true);;
-					if(reponse.equals("")){
-						arretForce=true;
-					}else{
-						incrementActions(-1);
-						playCard(reponse);
-					}
-				}
-				
-				
-				//Tresor
-				CardList cartestresor = getTreasureCards();
-				for(int i=0;i<cartestresor.size();i++){
-					playCard(cartestresor.get(i).getName());
-				}
-				
-				//Achat
-				arretForce = false;
-				while(buys>0 && money>0 && !arretForce && !game.availableSupplyCards().isEmpty()){
-					String reponse = chooseCard("Choose a card.", game.availableSupplyCards(), true);
-					if(reponse.equals("")){
-						arretForce=true;
-					}else{
-						buyCard(reponse);
-					}
-				}
-				
-				//Fin
-				System.out.println("FIN TOUR");
-				endTurn();
+		endTurn();	
 		
 	}
 }

@@ -14,7 +14,7 @@ public class Gold extends TreasureCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +3 Pièces";
+		return super.toString() + " +3 Pièces.\n";
 	}
 	
 	public int treasureValue() {

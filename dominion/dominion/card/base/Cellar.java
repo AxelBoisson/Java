@@ -17,9 +17,9 @@ public class Cellar extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +1 Action.\n" + 
+		return super.toString() + " Effet: +1 Action." + 
 				" Défaussez autant de cartes que vous voulez." + 
-				" +1 Carte par carte défaussée.";
+				" +1 Carte par carte défaussée.\n";
 	}
 	
 	public void play(Player p) {

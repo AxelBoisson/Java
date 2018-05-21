@@ -37,7 +37,7 @@ public class Game {
 	 * Scanner permettant de lire les entrées au clavier
 	 */
 	private Scanner scanner;
-
+	
 	
 	/**
 	 * Constructeur

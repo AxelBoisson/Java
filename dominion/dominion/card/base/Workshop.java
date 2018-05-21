@@ -15,7 +15,7 @@ public class Workshop extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " Recevez une carte coûtant jusqu'à 4 Pièces.";
+		return super.toString() + " Effet: Recevez une carte coûtant jusqu'à 4 Pièces. \n";
 	}
 	
 	public void play(Player p) {

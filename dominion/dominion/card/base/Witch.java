@@ -18,8 +18,8 @@ public class Witch extends AttackCard {
 
 	
 	public String toString() {
-		return super.toString() + " +2 Cartes.\n" + 
-				" Tous vos adversaires recoivent une carte Curse.";
+		return super.toString() + " Effet: +2 Cartes." + 
+				" Tous vos adversaires recoivent une carte Curse.\n";
 	}
 	
 	public void play(Player p) {

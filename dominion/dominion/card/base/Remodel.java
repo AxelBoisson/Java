@@ -16,8 +16,8 @@ public class Remodel extends ActionCard {
 	}
 	
 	public String toStrin() {
-		return super.toString() + " Écartez une carte de votre main.\n" + 
-				" Recevez une carte coûtant jusqu'à 2 Pièces de plus que la carte écartée.";
+		return super.toString() + " Effet: Écartez une carte de votre main." + 
+				" Recevez une carte coûtant jusqu'à 2 Pièces de plus que la carte écartée.\n";
 	}
 	
 	public void play(Player p) {

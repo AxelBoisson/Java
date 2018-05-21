@@ -17,9 +17,9 @@ public class Festival extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + "+2 Actions." + 
+		return super.toString() + " Effet: +2 Actions." + 
 				" +1 Achat." + 
-				" +2 Pièces.";
+				" +2 Pièces.\n";
 	}
 	
 	public void play(Player p) {

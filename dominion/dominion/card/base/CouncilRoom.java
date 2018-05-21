@@ -18,9 +18,9 @@ public class CouncilRoom extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +4 Cartes." + 
-				" +1 Achat.\n" + 
-				" Tous vos adversaires piochent 1 carte.";
+		return super.toString() + " Effet: +4 Cartes." + 
+				" +1 Achat." + 
+				" Tous vos adversaires piochent 1 carte.\n";
 	}
 	
 	public void play(Player p) {

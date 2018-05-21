@@ -15,7 +15,7 @@ public class Smithy extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +3 Cartes.";
+		return super.toString() + " Effet: +3 Cartes.\n";
 	}
 	
 	public void play(Player p) {

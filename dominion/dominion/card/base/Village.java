@@ -16,8 +16,8 @@ public class Village extends ActionCard {
 	}
 	
 	public String toString() {
-		return super.toString() + " +1 Carte" + 
-				" +2 Actions";
+		return super.toString() + " Effet: +1 Carte" + 
+				" +2 Actions.\n";
 	}
 	
 	public void play(Player p) {
